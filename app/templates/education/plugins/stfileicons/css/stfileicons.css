@@ -1,0 +1,140 @@
+a[href$='.doc'],
+a[href$='.docx'],
+a[href$='.pdf'],
+a[href$='.PDF'],
+a[href$='.rar'],
+a[href$='.zip'],
+a[href$='.ppt'],
+a[href$='.pptx'],
+a[href$='.xls'],
+a[href$='.xlsx']{
+	display: block;
+    color: #000
+}
+
+a[href$='.doc'] span,
+a[href$='.docx'] span,
+a[href$='.pdf'] span,
+a[href$='.PDF'] span,
+a[href$='.rar'] span,
+a[href$='.zip'] span,
+a[href$='.ppt'] span,
+a[href$='.pptx'] span,
+a[href$='.xls'] span,
+a[href$='.xlsx'] span {
+    display: inline-block;
+    margin-top: 6px;
+}
+
+
+a[href$='.doc']:before,
+a[href$='.docx']:before {
+	font-family: 'FontAwesome';
+	display: block;
+	content: "\f1c2";
+	margin-right: 7px;
+	float: left
+}
+
+
+
+a[href$='.pdf']:before,
+a[href$='.PDF']:before {
+	font-family: 'FontAwesome';
+	display: block;
+	content: "\f1c1";
+	margin-right: 7px;
+	float: left
+}
+
+a[href$='.rar']:before,
+a[href$='.zip']:before {
+	font-family: 'FontAwesome';
+	display: block;
+	content: "\f1c6";
+	margin-right: 7px;
+	float: left
+}
+
+a[href$='.xlsx']:before,
+a[href$='.xls']:before {
+	font-family: 'FontAwesome';
+	display: block;
+	content: "\f1c3";
+	margin-right: 7px;
+	float: left
+}
+
+a[href$='.pptx']:before,
+a[href$='.ppt']:before {
+	font-family: 'FontAwesome';
+	display: block;
+	content: "\f1c4";
+	margin-right: 7px;
+	float: left
+}
+a[href$='.doc']:after,
+a[href$='.docx']:after,
+a[href$='.pdf']:after,
+a[href$='.PDF']:after,
+a[href$='.rar']:after,
+a[href$='.zip']:after,
+a[href$='.ppt']:after,
+a[href$='.pptx']:after,
+a[href$='.xls']:after,
+a[href$='.xlsx']:after{
+	content: "";
+	display: block;
+	height: 1px;
+	background: #dadada;
+	margin-top: 10px;
+	clear: both
+}
+
+a[href$=".doc"]:before,
+a[href$=".docx"]:before,
+a[href$=".doc"]:hover,
+a[href$=".docx"]:hover {
+    color: #136ed6;
+}
+
+a[href$=".pdf"]:before,
+a[href$=".PDF"]:before,
+a[href$=".pdf"]:hover,
+a[href$=".PDF"]:hover {
+    color: #d61320;
+}
+
+a[href$=".rar"]:before,
+a[href$=".zip"]:before,
+a[href$=".rar"]:hover,
+a[href$=".zip"]:hover {
+    color: #995b0b;
+}
+
+a[href$=".xlsx"]:before,
+a[href$=".xls"]:before,
+a[href$=".xlsx"]:hover,
+a[href$=".xls"]:hover {
+    color: #286b13
+}
+
+a[href$=".pptx"]:before,
+a[href$=".ppt"]:before,
+a[href$=".pptx"]:hover,
+a[href$=".ppt"]:hover {
+    color: #ff4800
+}
+
+a[href$=".doc"]:before,
+a[href$=".docx"]:before,
+a[href$=".pdf"]:before,
+a[href$=".PDF"]:before,
+a[href$=".rar"]:before,
+a[href$=".zip"]:before,
+a[href$=".xlsx"]:before,
+a[href$=".xls"]:before,
+a[href$=".pptx"]:before,
+a[href$=".ppt"]:before {
+    font-size: 22px
+}
