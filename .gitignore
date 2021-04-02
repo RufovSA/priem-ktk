@@ -33,3 +33,4 @@ composer.lock
 
 # Reagordi File #
 data/
+vendor/
