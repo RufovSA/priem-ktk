@@ -11,6 +11,11 @@ $collector->any('priem/statement.pdf', function () {
 
     $session = Reagordi::$app->context->session;
 
+    if (!Reagordi::$app->context->session->has('user_id')) {
+        header('Location: ' . HOME_URL);
+        exit();
+    }
+
     \Dompdf\Autoloader::register();
 
     ob_start();

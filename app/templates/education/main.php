@@ -8,7 +8,6 @@ if ( !Reagordi::$app->context->request->isAjaxRequest() ):
 <html lang="<?= LANGUAGE_ID ?>">
 <head>
     <?= Reagordi::getInstance()->getContext()->getHead() ?>
-    <!--Morris Chart CSS -->
 <?= Asset::getInstance()->addCss(TEMPLATE_URL . '/plugins/morris/morris.css') ?>
 <?= Asset::getInstance()->addCss(TEMPLATE_URL . '/css/bootstrap.min.css') ?>
 <?= Asset::getInstance()->addCss(TEMPLATE_URL . '/css/core.css') ?>
@@ -18,142 +17,10 @@ if ( !Reagordi::$app->context->request->isAjaxRequest() ):
 <?= Asset::getInstance()->addCss(TEMPLATE_URL . '/css/responsive.css') ?>
 <?= Asset::getInstance()->addCss(TEMPLATE_URL . '/plugins/fileinput/css/fileinput.css') ?>
 <?= Asset::getInstance()->addCss(TEMPLATE_URL . '/plugins/stfileicons/css/stfileicons.css') ?>
+<?= Asset::getInstance()->addCss(TEMPLATE_URL . '/plugins/bootstrap-sweetalert/sweet-alert.css') ?>
 
     <link rel="shortcut icon" href="<?= Asset::getInstance()->addFileUrl( TEMPLATE_URL . '/favicon.ico' ) ?>" />
-    <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-<style>
-body {
-    overflow-x: hidden;
-}
 
-.topbar {
-    position: relative;
-}
-
-.content-page > .content {
-    margin-top: 0;
-}
-
-.color-red{
-    color: #ff0000;
-}
-
-#rde_load, #ep_block_addres_fact {
-    display: none;
-}
-
-#rde_load .box_layer_bg {
-    position: fixed;
-    background-color: #000;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9000;
-    overflow: hidden;
-    opacity: .7;
-    left: 0;
-}
-
-#rde_load .box_layer_wrap {
-    position: fixed;
-    z-index: 10000;
-    width: 100px;
-    top: 50%;
-    left: 50%;
-    margin: -50px auto 0 -50px;
-}
-
-    .lds-roller {
-        display: inline-block;
-        position: relative;
-        width: 80px;
-        height: 80px;
-    }
-    .lds-roller div {
-        animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        transform-origin: 40px 40px;
-    }
-    .lds-roller div:after {
-        content: " ";
-        display: block;
-        position: absolute;
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: #fff;
-        margin: -4px 0 0 -4px;
-    }
-    .lds-roller div:nth-child(1) {
-        animation-delay: -0.036s;
-    }
-    .lds-roller div:nth-child(1):after {
-        top: 63px;
-        left: 63px;
-    }
-    .lds-roller div:nth-child(2) {
-        animation-delay: -0.072s;
-    }
-    .lds-roller div:nth-child(2):after {
-        top: 68px;
-        left: 56px;
-    }
-    .lds-roller div:nth-child(3) {
-        animation-delay: -0.108s;
-    }
-    .lds-roller div:nth-child(3):after {
-        top: 71px;
-        left: 48px;
-    }
-    .lds-roller div:nth-child(4) {
-        animation-delay: -0.144s;
-    }
-    .lds-roller div:nth-child(4):after {
-        top: 72px;
-        left: 40px;
-    }
-    .lds-roller div:nth-child(5) {
-        animation-delay: -0.18s;
-    }
-    .lds-roller div:nth-child(5):after {
-        top: 71px;
-        left: 32px;
-    }
-    .lds-roller div:nth-child(6) {
-        animation-delay: -0.216s;
-    }
-    .lds-roller div:nth-child(6):after {
-        top: 68px;
-        left: 24px;
-    }
-    .lds-roller div:nth-child(7) {
-        animation-delay: -0.252s;
-    }
-    .lds-roller div:nth-child(7):after {
-        top: 63px;
-        left: 17px;
-    }
-    .lds-roller div:nth-child(8) {
-        animation-delay: -0.288s;
-    }
-    .lds-roller div:nth-child(8):after {
-        top: 56px;
-        left: 12px;
-    }
-    @keyframes lds-roller {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-
-</style>
 </head>
 <body class="fixed-left">
     <div id="rde_load">
@@ -183,18 +50,21 @@ body {
                 <a href="<?= HOME_URL ?>" class="logo">
                     <span><?= Reagordi::getInstance()->getConfig()->get('site_name') ?></span>
                 </a>
+                <?php /*
                 <!-- Image Logo here -->
                 <!--<a href="index.html" class="logo">-->
                 <!--<i class="icon-c-logo"> <img src="assets/images/logo_sm.png" height="42"/> </i>-->
                 <!--<span><img src="assets/images/logo_light.png" height="20"/></span>-->
                 <!--</a>-->
+ */
+ ?>
             </div>
         </div>
 
         <!-- Button mobile view to collapse sidebar menu -->
         <div class="navbar navbar-default" role="navigation">
             <div class="container">
-                <div class="">
+                    <?php /*
                     <!--<div class="pull-left">
                         <button class="button-menu-mobile open-left waves-effect waves-light">
                             <i class="md md-menu"></i>
@@ -215,16 +85,11 @@ body {
                             </ul>
                         </li>
                     </ul>-->
-                </div>
-                <!--/.nav-collapse -->
+ */ ?>
             </div>
         </div>
     </div>
-    <!-- Top Bar End -->
-
-
-    <!-- ========== Left Sidebar Start ========== -->
-
+    <?php /*
     <!--<div class="left side-menu">
         <div class="sidebar-inner slimscrollleft">
             <div id="sidebar-menu">
@@ -470,31 +335,27 @@ body {
     <!-- ============================================================== -->
     <!-- Start right Content here -->
     <!-- ============================================================== -->
+*/ ?>
     <div class="content-page" style="margin-left:0">
-        <!-- Start content -->
         <div class="content">
             <div id="page_context" class="container">
 <?php endif ?>
-                <!--------------------------------------------------------------------------------------------------------->
                 <?php if ( isset($conteiner) ): ?>
                     <?= $conteiner ?>
                 <?php else: ?>
                     <br />
                     <div class="alert alert-danger">Данная страница удаленна или ещё не созданна</div>
                 <?php endif ?>
-                <!---------------------------------------------------------------------->
 <?php if ( !Reagordi::$app->context->request->isAjaxRequest() ): ?>
-            </div> <!-- container -->
-
-        </div> <!-- content -->
-
+            </div>
+        </div>
         <footer class="footer text-right" style="left:0">
             <a href="/"><?= Reagordi::getInstance()->getConfig()->get('site_name') ?></a> &copy; <?= date('Y') ?>. Все права защищены
         </footer>
 
     </div>
 </div>
-<!-- END wrapper -->
+
 <script>var resizefunc=[]</script>
 <?= Asset::getInstance()->addJs(TEMPLATE_URL . '/js/modernizr.min.js') ?>
 <?= Asset::getInstance()->addJs(TEMPLATE_URL . '/js/jquery.min.js') ?>
@@ -537,44 +398,6 @@ body {
                 language: "<?= LANGUAGE_ID ?>"
             });
         } catch (e){}
-
-        /*$(".knob").knob();
-
-        // Bind normal buttons
-        $('.ladda-button').ladda('bind', {timeout: 2000});
-
-        // Bind progress buttons and simulate loading progress
-        Ladda.bind('.progress-demo .ladda-button', {
-            callback: function (instance) {
-                var progress = 0;
-                var interval = setInterval(function () {
-                    progress = Math.min(progress + Math.random() * 0.1, 1);
-                    instance.setProgress(progress);
-
-                    if (progress === 1) {
-                        instance.stop();
-                        clearInterval(interval);
-                    }
-                }, 200);
-            }
-        });*/
-
-
-        /*var l = $('.ladda-button-demo').ladda();
-
-        l.click(function () {
-            // Start loading
-            l.ladda('start');
-
-            // Timeout example
-            // Do something in backend and then stop ladda
-            setTimeout(function () {
-                l.ladda('stop');
-            }, 12000)
-
-
-        });*/
-
     });
 </script>
 </body>

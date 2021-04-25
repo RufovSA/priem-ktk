@@ -2,40 +2,42 @@
 
 /** @var $collector Phroute\Phroute\RouteCollector */
 
-use Reagordi\Framework\Config\Config;
 use Reagordi\Framework\Web\View;
 
-$collector->get(
-  '',
-  function () {
-    Reagordi::getInstance()->getContext()->setTitle('Главная');
-    Reagordi::getInstance()->getContext()->setDescription('Описание главной страницы');
+$collector->any('', function () {
+    Reagordi::$app->context->setTitle('Главная');
+    Reagordi::$app->context->setDescription('Описание главной страницы');
+
+    if (Reagordi::$app->context->session->get('verify_offline') == Reagordi::$app->config->get('education', 'priem', 'key')) {
+        header('Location: ' . HOME_URL . '/priem/statement.html');
+        exit();
+    }
 
     ob_start();
 
-    if (Reagordi::getInstance()->getConfig()->get('education', 'priem', 'start_date') >
-      time()) {
-      ?>
+    if (Reagordi::$app->config->get('education', 'priem', 'start_date') >
+        time()) {
+        ?>
         <br/>
         <h1 class="text-center">Уважаемые абитуриенты!</h1>
         <h3>Подать документы в ГАПОУ КО КТК через Личный кабинет абитуриента Вы
             можете:</h3>
         <h3>с <?php echo date(
-            'd.m.Y: H:i',
-            Config::getInstance()->get(
-              'education',
-              'priem',
-              'start_date'
-            )
-          ); ?></h3>
+                'd.m.Y: H:i',
+                Reagordi::$app->config->get(
+                    'education',
+                    'priem',
+                    'start_date'
+                )
+            ); ?></h3>
         <h3>до <?php echo date(
-            'd.m.Y: H:i',
-            Config::getInstance()->get(
-              'education',
-              'priem',
-              'end_date'
-            )
-          ); ?></h3>
+                'd.m.Y: H:i',
+                Reagordi::$app->config->get(
+                    'education',
+                    'priem',
+                    'end_date'
+                )
+            ); ?></h3>
     <?php } else { ?>
         <form action="<?= HOME_URL ?>" method="post" class="form-signin"
               style="width:512px; margin: 0 auto">
@@ -47,14 +49,10 @@ $collector->get(
                        data-format="+7 (ddd) ddd dd - dd" required/>
             </div>
             <div class="form-group">
-                <label for="passport">Серия и номер паспорта</label>
-                <input type="text" id="passport" name="passport"
-                       class="form-control bfh-phone" placeholder="Серия и номер паспорта"
-                       data-format="dd dd dddddd" required/>
-            </div>
-            <div class="form-group">
-                <input type="checkbox" id="remember_me" value="remember_me" value="1"/>
-                <label for="remember_me">Запомнить меня</label>
+                <label for="passport">Пароль</label>
+                <input type="password" id="password" name="password"
+                       class="form-control" placeholder="Пароль"
+                        required/>
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
             <br/>
@@ -64,21 +62,20 @@ $collector->get(
                 </button>
             </a>
             <div>
-              <?php Reagordi::$app->context->components->includeComponent(
-                'reagordi:social',
-                'auth',
-                'defalut',
-                array(
-                  'page_url' => HOME_URL . '/priem/statement.html'
-                ),
-                false
-              ) ?>
+                <?php Reagordi::$app->context->components->includeComponent(
+                    'reagordi:social',
+                    'auth',
+                    'defalut',
+                    array(
+                        'page_url' => HOME_URL . '/priem/statement.html'
+                    ),
+                    false
+                ) ?>
             </div>
         </form>
-      <?php
+        <?php
     }
     View::getInstance()->assign('conteiner', ob_get_clean());
 
     return View::getInstance()->fech();
-  }
-);
+});

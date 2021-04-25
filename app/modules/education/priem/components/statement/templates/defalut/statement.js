@@ -1,3 +1,5 @@
+var document_data = new FormData();
+
 function ep_back(href, act, sid) {
     ep_loader(true);
     $.ajax({
@@ -19,16 +21,39 @@ function ep_back(href, act, sid) {
     });
 }
 
+function ep_change_input_file(e) {
+    $.each( e.files, function( key, value ){
+        document_data.append( $(e).attr('name'), value );
+    });
+    //console.log(document_data);
+}
+
 function ep_form(e) {
     ep_loader(true);
+
+    if ($('#rg_ep_act').attr('value') == '10') {
+        var data = document_data;
+        //data.append('uploaded_application', $("#file-0b").file);
+        //data.append('uploaded_passport', $("#file-1b").file);
+        //data.append('uploaded_certificate', $("#file-2b").file);
+        //data.append('act', $('#rg_ep_act').attr('value'));
+        data.append('sid', $('#rg_ep_sid').attr('value'));
+    } else {
+        var data = $(e).serialize();
+    }
+    //console.log(data);
+
     $.ajax({
         url: e.action,
         method: 'post',
         dataType: 'html',
+        cache: false,
+        processData: false, // Не обрабатываем файлы (Don't process the files)
+        contentType: false, // Так jQuery скажет серверу что это строковой запрос
         headers: {
             "Reagordi-Ajax": 'XMLHttpRequest'
         },
-        data: $(e).serialize(),
+        data: data,
         success: function (data) {
             ep_loader(false);
             $('#page_context').html(data);
@@ -83,6 +108,7 @@ function update_date() {
     ep_loader(true);
     var e = $('#ed_statement_form');
     var dat = e.serialize();
+
     $.ajax({
         url: e.action,
         method: 'post',
