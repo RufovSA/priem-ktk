@@ -64,18 +64,17 @@ if ( !Reagordi::$app->context->request->isAjaxRequest() ):
         <!-- Button mobile view to collapse sidebar menu -->
         <div class="navbar navbar-default" role="navigation">
             <div class="container">
-                    <?php /*
-                    <!--<div class="pull-left">
+                    <?php if (defined('RESPONSE_ADMIN') && RESPONSE_ADMIN): ?>
+                    <div class="pull-left">
                         <button class="button-menu-mobile open-left waves-effect waves-light">
                             <i class="md md-menu"></i>
                         </button>
                         <span class="clearfix"></span>
-                    </div>-->
+                    </div>
 
-                    <!--
                     <ul class="nav navbar-nav navbar-right pull-right">
                         <li class="dropdown top-menu-item-xs">
-                            <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true"><img src="{TEMPLATE_URL}/images/users/avatar-1.jpg" alt="user-img" class="img-circle"> </a>
+                            <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true"><img src="<?= TEMPLATE_URL ?>/images/users/avatar-1.jpg" alt="user-img" class="img-circle"> </a>
                             <ul class="dropdown-menu">
                                 <li><a href="javascript:void(0)"><i class="ti-user m-r-10 text-custom"></i> Profile</a></li>
                                 <li><a href="javascript:void(0)"><i class="ti-settings m-r-10 text-custom"></i> Settings</a></li>
@@ -84,13 +83,13 @@ if ( !Reagordi::$app->context->request->isAjaxRequest() ):
                                 <li><a href="javascript:void(0)"><i class="ti-power-off m-r-10 text-danger"></i> Logout</a></li>
                             </ul>
                         </li>
-                    </ul>-->
- */ ?>
+                    </ul>
+                    <?php endif ?>
             </div>
         </div>
     </div>
-    <?php /*
-    <!--<div class="left side-menu">
+    <?php if (defined('RESPONSE_ADMIN') && RESPONSE_ADMIN): ?>
+    <div class="left side-menu">
         <div class="sidebar-inner slimscrollleft">
             <div id="sidebar-menu">
                 <ul>
@@ -327,7 +326,7 @@ if ( !Reagordi::$app->context->request->isAjaxRequest() ):
             </div>
             <div class="clearfix"></div>
         </div>
-    </div>-->
+    </div>
     <!-- Left Sidebar End -->
 
 
@@ -335,8 +334,8 @@ if ( !Reagordi::$app->context->request->isAjaxRequest() ):
     <!-- ============================================================== -->
     <!-- Start right Content here -->
     <!-- ============================================================== -->
-*/ ?>
-    <div class="content-page" style="margin-left:0">
+    <?php endif ?>
+    <div class="content-page"<?php if (!defined('RESPONSE_ADMIN') || !RESPONSE_ADMIN): ?> style="margin-left:0"<?php endif ?>>
         <div class="content">
             <div id="page_context" class="container">
 <?php endif ?>
@@ -349,7 +348,7 @@ if ( !Reagordi::$app->context->request->isAjaxRequest() ):
 <?php if ( !Reagordi::$app->context->request->isAjaxRequest() ): ?>
             </div>
         </div>
-        <footer class="footer text-right" style="left:0">
+        <footer class="footer text-right"<?php if (!defined('RESPONSE_ADMIN') || !RESPONSE_ADMIN): ?> style="left:0"<?php endif ?>>
             <a href="/"><?= Reagordi::getInstance()->getConfig()->get('site_name') ?></a> &copy; <?= date('Y') ?>. Все права защищены
         </footer>
 
