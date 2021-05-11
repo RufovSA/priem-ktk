@@ -20,9 +20,9 @@ class User
 
     private function __construct()
     {
-        if (Reagordi::$app->context->session->has('identity_id') && Reagordi::$app->context->session->has('identity')) {
+        /*if (Reagordi::$app->context->session->has('identity_id') && Reagordi::$app->context->session->has('identity')) {
 
-        }
+        }*/
     }
 
     public function login(IdentityInterface $identity, $duration = 0)

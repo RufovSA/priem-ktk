@@ -8,7 +8,7 @@ class Security
 {
     protected static $obj = null;
 
-    public function generatePasswordHash(string $password): string|bool|null
+    public function generatePasswordHash(string $password)
     {
         return password_hash($password, PASSWORD_DEFAULT);
     }
