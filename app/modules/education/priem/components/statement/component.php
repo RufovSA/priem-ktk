@@ -33,7 +33,7 @@ if (Reagordi::$app->context->session->get('finish')) {
 if (Reagordi::$app->context->server->getRequestMethod() == 'POST') {
     $no_check = (int)Reagordi::$app->context->request->getPost('no_check');
 
-    $_act = $act - 1;
+    $_act = $act - 1; // - 1
     if (is_file(__DIR__ . '/check/step_' . $_act . '.php')) {
         require_once __DIR__ . '/check/step_' . $_act . '.php';
     }
@@ -59,7 +59,7 @@ if (Reagordi::$app->context->session->get('finish') && $verify) {
         $key = Reagordi::$app->config->get('education', 'priem', 'key');
     Reagordi::$app->context->session->destroy();
     if ($key) Reagordi::$app->context->session->set('verify_offline', $key);
-    header('Location: ' . HOME_URL . '/blank.html?code=2');
+    header('Location: ' . HOME_URL . '/blank.html?code=1');
     exit();
 }
 

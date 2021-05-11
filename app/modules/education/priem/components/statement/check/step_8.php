@@ -10,6 +10,8 @@ use Reagordi\Education\Models\Entrant;
 
 if (Reagordi::$app->context->session->get('finish')) return false;
 
+$verify_offline = Reagordi::$app->context->session->get('verify_offline');
+
 $school_subject = Reagordi::$app->context->session->get('school_subject');
 $user_id = Reagordi::$app->context->session->get('user_id');
 $session = Reagordi::$app->context->session->getAll();
@@ -46,6 +48,7 @@ $session['school_subject'] = json_encode($school_subject);
 if (!$user_id) {
     $error[] = 'Неизвестная ошибка';
     Reagordi::$app->context->session->destroy();
+    if ($verify_offline) Reagordi::$app->context->session->set('verify_offline', $verify_offline);
     return false;
 }
 

@@ -31,35 +31,39 @@ function ep_change_input_file(e) {
 function ep_form(e) {
     ep_loader(true);
 
-    if ($('#rg_ep_act').attr('value') == '10') {
-        var data = document_data;
-        //data.append('uploaded_application', $("#file-0b").file);
-        //data.append('uploaded_passport', $("#file-1b").file);
-        //data.append('uploaded_certificate', $("#file-2b").file);
-        //data.append('act', $('#rg_ep_act').attr('value'));
-        data.append('sid', $('#rg_ep_sid').attr('value'));
-    } else {
-        var data = $(e).serialize();
-    }
-    //console.log(data);
-
-    $.ajax({
+    var d = {
         url: e.action,
         method: 'post',
         dataType: 'html',
         cache: false,
-        processData: false, // Не обрабатываем файлы (Don't process the files)
-        contentType: false, // Так jQuery скажет серверу что это строковой запрос
         headers: {
             "Reagordi-Ajax": 'XMLHttpRequest'
         },
-        data: data,
         success: function (data) {
             ep_loader(false);
             $('#page_context').html(data);
             ep_updatephone();
         }
-    });
+    };
+
+    if ($('#rg_ep_act').attr('value') == '10') {
+        var data = document_data;
+        alert();
+        //data.append('uploaded_application', $("#file-0b").file);
+        //data.append('uploaded_passport', $("#file-1b").file);
+        //data.append('uploaded_certificate', $("#file-2b").file);
+        //data.append('act', $('#rg_ep_act').attr('value'));
+        data.append('sid', $('#rg_ep_sid').attr('value'));
+        d.data = data;
+        d.processData = false;
+        d.contentType = false;
+    } else {
+        var data = $(e).serialize();
+        d.data = data;
+    }
+    //console.log(data);
+
+    $.ajax(d);
 }
 
 function ep_loader(st) {

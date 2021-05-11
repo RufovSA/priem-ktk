@@ -8,10 +8,6 @@
 
 use Verot\Upload\Upload;
 
-echo '<pre>';
-print_r($_FILES);
-print_r($_POST);
-echo '</pre>';
 if (
     isset($_FILES['uploaded_application']) &&
     isset($_FILES['uploaded_certificate']) &&

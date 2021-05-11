@@ -18,7 +18,7 @@ define('REAGORDI_ENV', 'dev');
  *
  * @var string
  */
-define('R_DEBUG', false);
+define('R_DEBUG', true);
 
 /**
  * Разрешает мультисайтовость
