@@ -16,6 +16,8 @@ $collector->any(
     Reagordi::$app->context->setTitle(t('Application submission'));
     Reagordi::$app->context->setDescription(t('Application submission'));
 
+    Reagordi::$app->context->session->open();
+
     if (Reagordi::$app->config->get('education', 'priem', 'start_date') > time()) {
       header('Location: ' . HOME_URL);
       die();

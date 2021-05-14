@@ -40,8 +40,8 @@ class Session
             }
             $status = session_start();
             $this->sid = session_id();
-            return $status;
         }
+        return $this->sid;
     }
 
     /**

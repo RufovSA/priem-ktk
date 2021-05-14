@@ -230,14 +230,14 @@ $collector->any('priem/statement.pdf', function () {
             <td>Очная форма обучения</td>
             <td>Бюджетное финансирование</td>
         </tr>
-        <?php if (Reagordi::$app->context->session->get('specialtie2')): ?>
+        <?php if (Reagordi::$app->context->session->get('specialtie2') && Reagordi::$app->context->session->get('specialtie2') != 'Выбор специальности'): ?>
             <tr>
                 <td><?= Reagordi::$app->context->session->get('specialtie2') ?></td>
                 <td>Очная форма обучения</td>
                 <td>Бюджетное финансирование</td>
             </tr>
         <?php endif ?>
-        <?php if (Reagordi::$app->context->session->get('specialtie3')): ?>
+        <?php if (Reagordi::$app->context->session->get('specialtie3') && Reagordi::$app->context->session->get('specialtie3') != 'Выбор специальности'): ?>
             <tr>
                 <td><?= Reagordi::$app->context->session->get('specialtie3') ?></td>
                 <td>Очная форма обучения</td>
@@ -253,9 +253,9 @@ $collector->any('priem/statement.pdf', function () {
     <p>
         <b>
             <?php if (Reagordi::$app->context->session->get('type_doc_edu') == '1'): ?>
-                Аттестат
+                Аттестат (9 Кл.)
             <?php else: ?>
-                Диплом
+                Аттестат (11 Кл.)
             <?php endif ?>
             №
         </b>
@@ -263,9 +263,9 @@ $collector->any('priem/statement.pdf', function () {
     </p>
     <?php if ($bal == 5): ?>
         <p><u>Имеею медаль (<?php if (Reagordi::$app->context->session->get('type_doc_edu') == '1'): ?>
-                    Аттестат
+                    Аттестат (9 Кл.)
                 <?php else: ?>
-                    Диплом
+                    Аттестат (11 Кл.)
                 <?php endif ?>) с «отличием»</u></p>
     <?php endif ?>
     <?php if (Reagordi::$app->context->session->has('checkbox_olimpiada')): ?>

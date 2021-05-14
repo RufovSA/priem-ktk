@@ -28,7 +28,7 @@ $subject_i = 1;
           $_SESSION['type_doc_edu'] == '1') { ?> selected<?php } ?>>Аттестат (9 кл.)
         </option>
         <option value="2"<?php if (isset($_SESSION['type_doc_edu']) &&
-          $_SESSION['type_doc_edu'] == '2') { ?> selected<?php } ?>>Диплом (11 кл.)
+          $_SESSION['type_doc_edu'] == '2') { ?> selected<?php } ?>>Аттестат (11 кл.)
         </option>
     </select>
 </div>
