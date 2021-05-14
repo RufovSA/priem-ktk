@@ -37,6 +37,7 @@ $collector->any(
 
     Reagordi::$app->context->view->assign('conteiner', ob_get_clean());
 
+
     return Reagordi::$app->context->view->fech();
   }
 );
