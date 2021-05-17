@@ -3,6 +3,8 @@
 /** @var array $list_priem */
 /** @var string $page_url */
 /** @var Reagordi\Framework\Base\Server $sessions */
+
+$admin = isset($admin) ? $admin: false;
 ?>
 <div class="form-group col-md-12">
     <label for="type_doc">Документ, удостоверяющий личность <span

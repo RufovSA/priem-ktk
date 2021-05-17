@@ -9,6 +9,8 @@ use Reagordi\GeoVk\Cities;
 use Reagordi\GeoVk\Countries;
 use Reagordi\GeoVk\Regions;
 
+$admin = isset($admin) ? $admin: false;
+
 $countri_id =
   Reagordi::$app->context->session->has('addres_passport_country') ?
     Reagordi::$app->context->session->get('addres_passport_country') :

@@ -20,6 +20,8 @@ $subjects = array(
   'ОБЖ',
 );
 $subject_i = 1;
+
+$admin = isset($admin) ? $admin: false;
 ?>
 <div class="form-group col-md-12">
     <label for="type_doc_edu">Тип документа <span class="color-red">*</span></label>

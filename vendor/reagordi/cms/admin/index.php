@@ -8,7 +8,7 @@ $collector->any('', function () {
 
     ob_start();
     ?>
-
+    <a href="<?= HOME_URL ?>/<?= Reagordi::$app->options->get('url', 'admin_path') ?>/priem/statement.html">Заявления абитуриентов</a>
     <?php
     Reagordi::$app->context->view->assign('conteiner', ob_get_clean());
 

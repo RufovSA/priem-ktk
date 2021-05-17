@@ -4,6 +4,8 @@
 /** @var string $page_url */
 /** @var Reagordi\Framework\Base\Server $sessions */
 
+$admin = isset($admin) ? $admin: false;
+
 $social_status = array(
   'Инвалид',
   'Сирота',

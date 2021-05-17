@@ -3,6 +3,8 @@
 /** @var array $list_priem */
 /** @var string $page_url */
 /** @var Reagordi\Framework\Base\Server $sessions */
+
+$admin = isset($admin) ? $admin: false;
 ?>
 <p>
     <a href="<?= HOME_URL ?>/priem/statement.pdf" target="_blank">

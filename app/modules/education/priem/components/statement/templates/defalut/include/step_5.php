@@ -12,6 +12,8 @@ $status = array(
   'Дедушка',
 );
 
+$admin = isset($admin) ? $admin: false;
+
 $bdate = new DateTime(Reagordi::$app->context->session->get('bdate'));
 
 $age = false;

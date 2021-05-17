@@ -2,32 +2,35 @@
 /** @var int $act */
 /** @var array $list_priem */
 /** @var string $page_url */
+/** @var object $entrant */
 /** @var Reagordi\Framework\Base\Server $sessions */
+
+$admin = isset($admin) ? $admin: false;
 ?>
 <div class="form-group col-md-4">
     <label for="last_name">Фамилия <span class="color-red">*</span></label>
     <input type="text" class="form-control" id="last_name" name="last_name"
-           placeholder="Фамилия" value="<?= $sessions->get('last_name') ?>" required/>
+           placeholder="Фамилия" value="<?php if ($admin): ?><?= $entrant->last_name ?><?php else: ?><?= $sessions->get('last_name') ?><?php endif ?>" required/>
 </div>
 <div class="form-group col-md-4">
     <label for="first_name">Имя <span class="color-red">*</span></label>
     <input type="text" class="form-control" id="first_name" name="first_name"
-           placeholder="Имя"<?php if ($sessions->has(
+           placeholder="Имя"<?php if ($admin): ?>value="<?= $entrant->first_name ?>"<?php elseif ($sessions->has(
         'first_name'
     )): ?> value="<?= $sessions->get('first_name') ?>"<?php endif ?> required/>
 </div>
 <div class="form-group col-md-4">
     <label for="middle_name">Отчество</label>
     <input type="text" class="form-control" id="middle_name" name="middle_name"
-           placeholder="Отчество"<?php if ($sessions->has(
+           placeholder="Отчество"<?php if ($admin): ?>value="<?= $entrant->middle_name ?>"<?php elseif ($sessions->has(
         'middle_name'
     )): ?> value="<?= $sessions->get('middle_name') ?>"<?php endif ?> />
 </div>
 <div class="form-group col-md-4">
     <label for="sex">Пол <span class="color-red">*</span></label>
     <select id="sex" class="form-control" name="sex">
-        <option value="1" <?php if ($sessions->get('sex') == '1'): ?> selected<?php endif ?>>Мужской</option>
-        <option value="2" <?php if ($sessions->get('sex') == '2'): ?> selected<?php endif ?>>Женский</option>
+        <option value="1"<?php if ($admin && $entrant->sex == '1'): ?> selected<?php elseif ($sessions->get('sex') == '1'): ?> selected<?php endif ?>>Мужской</option>
+        <option value="2"<?php if ($admin && $entrant->sex == '2'): ?> selected<?php elseif ($sessions->get('sex') == '2'): ?> selected<?php endif ?>>Женский</option>
     </select>
 </div>
 <div class="form-group col-md-4">
@@ -74,7 +77,7 @@
            name="email"<?php if (isset($_SESSION['email'])) { ?> value="<?php echo $_SESSION['email']; ?>"<?php } ?>
            placeholder="E-Mail" required/>
 </div>
-
+<?php if (!$admin): ?>
 <div class="form-group col-md-6">
     <label for="password">Пароль <span class="color-red">*</span></label>
     <input type="password" class="form-control" id="password" name="password"
@@ -85,3 +88,23 @@
     <input type="password" class="form-control" id="password2" name="password2"
            placeholder="Повторите пароль" required/>
 </div>
+<?php endif ?>
+<?php if ($admin): ?>
+<div class="form-group col-md-12">
+    <label for="type_certificate">Статус документа</label>
+    <select id="type_certificate" name="type_certificate" class="ep_addres">
+            <option value="0" <?php if ($entrant->type_certificate == '0'): ?> selected<?php endif ?>>Копия</option>
+            <option value="1" <?php if ($entrant->type_certificate == '1'): ?> selected<?php endif ?>>Оригинал</option>
+    </select>
+</div>
+    <div class="form-group col-md-12">
+        <label for="entrant_status">Статус заявления</label>
+        <select id="entrant_status" name="entrant_status" class="ep_addres">
+            <option value="0" <?php if ($entrant->entrant_status == '0'): ?> selected<?php endif ?>>Пустая</option>
+            <option value="1" <?php if ($entrant->entrant_status == '1'): ?> selected<?php endif ?>>Загрузка документов</option>
+            <option value="2" <?php if ($entrant->entrant_status == '2'): ?> selected<?php endif ?>>На обработке</option>
+            <option value="3" <?php if ($entrant->entrant_status == '3'): ?> selected<?php endif ?>>На изменении</option>
+            <option value="4" <?php if ($entrant->entrant_status == '4'): ?> selected<?php endif ?>>Завершена</option>
+        </select>
+    </div>
+<?php endif ?>

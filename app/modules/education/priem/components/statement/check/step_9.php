@@ -58,6 +58,9 @@ if (
         $key = null;
         if (Reagordi::$app->context->session->get('verify_offline') == Reagordi::$app->config->get('education', 'priem', 'key'))
             $key = Reagordi::$app->config->get('education', 'priem', 'key');
+        $user_id = Reagordi::$app->context->session->get('user_id');
+        $user_id = Entrant::addEntrant(['entrant_status' => 2, 'certificate' => 0], $user_id);
+
         Reagordi::$app->context->session->destroy();
         if ($key) Reagordi::$app->context->session->set('verify_offline', $key);
         header('Location: ' . HOME_URL . '/blank.html?code=1');
