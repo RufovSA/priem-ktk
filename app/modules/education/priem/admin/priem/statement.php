@@ -140,8 +140,7 @@ $collector->any(
                     <button type="button" class="btn btn-default waves-effect" data-toggle="modal"
                             data-target="#rg_filter_statement">Фильтр
                     </button>
-                    <a href="/users.html?act=report" target="_blank" class="btn btn-default waves-effect"
-                       style="margin-left:10px">Сформировать отчет</a>
+                    <button type="button" class="btn btn-default waves-effect" onclick="window.print();" style="margin-left:10px">Печать</button>
                 </div>
                 <h4 class="page-title">Заявления абитуриентов</h4>
                 <ol class="breadcrumb">

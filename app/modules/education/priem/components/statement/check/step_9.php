@@ -7,6 +7,7 @@
  */
 
 use Verot\Upload\Upload;
+use Reagordi\Education\Models\Entrant;
 
 if (
     isset($_FILES['uploaded_application']) &&

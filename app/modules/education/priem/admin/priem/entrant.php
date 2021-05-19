@@ -58,7 +58,7 @@ $collector->any(
                     $sum += $v['estimation'];
                 }
             }
-            $_POST['entrant_status'] = 1;
+            //$_POST['entrant_status'] = 1;
             $_POST['average_score'] = $sum / $count;
             $_POST['school_subject'] = json_encode($_POST['school_subject']);
 

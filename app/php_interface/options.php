@@ -10,7 +10,7 @@ return [
             'onlySSL' => false,
             'enableCookieValidation' => true,
             'cookieValidationKey' => '7843hfdjks8',
-            'multiCookieDomain' => true
+            'multiCookieDomain' => false
         ],
         'user' => [
             'identityClass' => 'Reagordi\\CMS\\Components\\User',

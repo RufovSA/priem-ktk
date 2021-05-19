@@ -82,6 +82,7 @@ if ($domain_cookie_count > 2) {
     $domain_cookie = array_slice($domain_cookie, $domain_allow_count);
 }
 $domain_cookie = "." . implode(".", $domain_cookie);
+
 /**
  * Префикс Cookie
  *
