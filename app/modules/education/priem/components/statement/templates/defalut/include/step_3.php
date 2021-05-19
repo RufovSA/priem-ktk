@@ -10,6 +10,7 @@ use Reagordi\GeoVk\Countries;
 use Reagordi\GeoVk\Regions;
 
 $admin = isset($admin) ? $admin: false;
+$admin_new = isset($admin_new) ? $admin_new: false;
 
 $countri_id =
   Reagordi::$app->context->session->has('addres_passport_country') ?
@@ -22,7 +23,6 @@ $region_id =
 
 ?>
 <h3>Адрес постоянной прописки</h3>
-
 <div class="form-group col-md-12">
     <input type="checkbox" id="checkbox_addres_pass_noselect"
            name="checkbox_addres_pass_noselect"
@@ -32,7 +32,6 @@ $region_id =
     <label for="checkbox_addres_pass_noselect">Не нашел свой адрес в адресном
         классификаторе</label>
 </div>
-
 <?php if (Reagordi::$app->context->session->has('checkbox_addres_pass_noselect')): ?>
     <div class="form-group col-md-12">
         <label for="addres_passport_noselect">Адрес постоянной прописки<span

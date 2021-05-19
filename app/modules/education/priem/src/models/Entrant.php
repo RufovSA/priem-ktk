@@ -55,4 +55,12 @@ class Entrant extends SimpleModel
     {
         return R::load(DB_PREF . 'entrant', $id);
     }
+
+    public static function countSpecialization($class, $specialization, $type_certificate)
+    {
+        return R::getCell(
+            'SELECT COUNT(`id`) FROM `' . DB_PREF . 'entrant` WHERE `type_doc_edu` = ? AND `specialtie1` = ? AND `type_certificate` = ? AND `entrant_status` = ?',
+            [$class, $specialization, $type_certificate, '4']
+        );
+    }
 }

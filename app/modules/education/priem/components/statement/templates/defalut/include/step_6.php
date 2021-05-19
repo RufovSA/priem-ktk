@@ -12,7 +12,7 @@ $specialties = Reagordi::$app->config->get('education', 'priem', 'specialties');
 <div class="form-group col-md-12">
     <label for="specialtie1">Специальность <span class="color-red">*</span></label>
     <select id="specialtie1" name="specialtie1" class="ep_addres"
-            onchange="update_date();" required>
+            <?php if (!$admin): ?>onchange="update_date();"<?php endif ?> required>
       <?php foreach ($specialties as $specialtie): ?>
           <optgroup label="<?= $specialtie['name'] ?>">
             <?php foreach ($specialtie['value'] as $value): ?>
@@ -32,7 +32,7 @@ $specialties = Reagordi::$app->config->get('education', 'priem', 'specialties');
 <div class="form-group col-md-12">
     <label for="specialtie2">Дополнительная специальность</label>
     <select id="specialtie2" name="specialtie2" class="ep_addres"
-            onchange="update_date();">
+            <?php if (!$admin): ?>onchange="update_date();"<?php endif ?>>
         <option>Выбор специальности</option>
       <?php foreach ($specialties as $specialtie): ?>
           <optgroup label="<?= $specialtie['name'] ?>">
@@ -56,7 +56,7 @@ $specialties = Reagordi::$app->config->get('education', 'priem', 'specialties');
 <div class="form-group col-md-12">
     <label for="specialtie3">Дополнительная специальность</label>
     <select id="specialtie3" name="specialtie3" class="ep_addres"
-            onchange="update_date();">
+            <?php if (!$admin): ?>onchange="update_date();"<?php endif ?>>
         <option>Выбор специальности</option>
       <?php foreach ($specialties as $specialtie): ?>
           <optgroup label="<?= $specialtie['name'] ?>">

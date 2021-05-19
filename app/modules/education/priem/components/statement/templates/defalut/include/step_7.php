@@ -6,24 +6,38 @@
 
 $admin = isset($admin) ? $admin: false;
 
-$social_status = array(
-  'Инвалид',
+$benefits_status = array(
+  1 => 'Инвалид',
   'Сирота',
-  'Правительственные льготы',
+  'Малоимущие',
+  'ЧС',
+  'Многодетные',
+);
+
+$language_status = array(
+    1 => 'Английский язык',
+    'Немецкий язык',
+    'Французский язык',
+    'Другое',
 );
 ?>
 <div class="form-group col-md-12">
     <label for="foreign_language">Иностранный язык <span
                 class="color-red">*</span></label>
-    <input type="text" class="form-control" id="foreign_language" name="foreign_language"
-           placeholder="Иностранный язык"
-           value="<?= $sessions->get('foreign_language') ?>" required/>
+    <select id="foreign_language" name="foreign_language" class="ep_addres">
+        <?php foreach ($language_status as $key => $st): ?>
+            <option value="<?= $key ?>"<?php if ($sessions->get('foreign_language') == $key): ?> selected<?php endif ?>><?= $st ?></option>
+        <?php endforeach ?>
+    </select>
 </div>
 <div class="form-group col-md-12">
     <label for="benefits">При поступлении имею следующие льготы</label>
-    <input type="text" class="form-control" id="benefits" name="benefits"
-           placeholder="При поступлении имею следующие льготы"
-           value="<?= $sessions->get('benefits') ?>"/>
+    <select id="benefits" name="benefits" class="ep_addres">
+        <option value="0">Не имею льгот</option>
+        <?php foreach ($benefits_status as $key => $st): ?>
+        <option value="<?= $key ?>"<?php if ($sessions->get('benefits') == $key): ?> selected<?php endif ?>><?= $st ?></option>
+        <?php endforeach ?>
+    </select>
 </div>
 <div class="form-group col-md-12">
     <label for="social_status">Социальный статус</label>
