@@ -66,14 +66,14 @@ $class2 = [];
 <table class="ktk_table">
     <thead>
     <tr class="ta_c">
-        <td rowspan="2">№ п/п</td>
+        <td rowspan="2">№</td>
         <td rowspan="2">Наименование специальности/профессии</td>
         <td colspan="2">Количество поданных заявлений</td>
         <td rowspan="2">Контрольные цифры приема</td>
     </tr>
     <tr class="ta_c">
-        <td>Копий</td>
-        <td>Оригинал</td>
+        <td>Копии</td>
+        <td>Оригиналы</td>
     </tr>
     </thead>
     <tbody>

@@ -85,7 +85,7 @@ $admin = isset($admin) ? $admin: false;
                 <th>
                     <select class="form-control"
                             name="school_subject[<?= $subject_i ?>][estimation]" required>
-                        <option value="0">Выбирите оценку</option>
+                        <option value="0">Выберете оценку</option>
                       <?php for ($i =
                                    Reagordi::$app->config->get(
                                      'education',
@@ -117,7 +117,7 @@ $admin = isset($admin) ? $admin: false;
                 <th>
                     <select class="form-control"
                             name="school_subject[<?= $j ?>][estimation]">
-                        <option value="0">Выбирите оценку</option>
+                        <option value="0">Выберете оценку</option>
                       <?php for ($i =
                                    Reagordi::$app->config->get(
                                      'education',

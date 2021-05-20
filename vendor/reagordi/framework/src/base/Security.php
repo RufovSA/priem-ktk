@@ -37,7 +37,7 @@ class Security
         $ciphertext_raw = substr($c, $ivlen + $sha2len);
         $plaintext = @openssl_decrypt($ciphertext_raw, $cipher, Reagordi::$app->options->get('components', 'request', 'cookieValidationKey'), $options = OPENSSL_RAW_DATA, $iv);
         $calcmac = hash_hmac('sha256', $ciphertext_raw, Reagordi::$app->options->get('components', 'request', 'cookieValidationKey'), $as_binary = true);
-        if (hash_equals($hmac, $calcmac)) {
+        if (@hash_equals($hmac, $calcmac)) {
             return $plaintext;
         }
         return '';

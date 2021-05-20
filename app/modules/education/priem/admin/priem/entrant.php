@@ -60,6 +60,11 @@ $collector->any(
         //$sessions->remove('school_subject');
         $_SESSION['school_subject'] = json_decode($entrant->school_subject, true);
 
+        if (Reagordi::$app->context->request->getQuery('act') == 'entrant.pdf') {
+            getEntrant($sessions);
+            exit;
+        }
+
         if (Reagordi::$app->context->server->getRequestMethod() == 'POST') {
             $count = 0;
             $sum = 0;
@@ -147,7 +152,10 @@ $collector->any(
                         <a href="#v-panel7" data-toggle="tab" aria-expanded="true">7. Прочее</a>
                     </li>
                     <li class="">
-                        <a href="#v-panel8" data-toggle="tab" aria-expanded="true">8. Скан-копии документов</a>
+                        <a href="#v-panel8" data-toggle="tab" aria-expanded="true">8. Заполнение заявления</a>
+                    </li>
+                    <li class="">
+                        <a href="#v-panel9" data-toggle="tab" aria-expanded="true">9. Скан-копии документов</a>
                     </li>
                 </ul>
 
@@ -174,6 +182,16 @@ $collector->any(
                         <?php require_once dirname(dirname(__DIR__)) . '/components/statement/templates/defalut/include/step_7.php'; ?>
                     </div>
                     <div class="tab-pane" id="v-panel8">
+                        <div class="col-md-12 m-b-20">
+                            <a href="<?= HOME_URL ?>/<?= Reagordi::$app->options->get('url', 'admin_path') ?>/priem/entrant/<?= $id ?>?act=entrant.pdf"
+                               target="_blank">
+                                <span>Заявление поступающего</span>
+                                <span>(1 Мб)</span>
+                                <span style="float: right"><?= date('d.m.Y H:i') ?></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="v-panel9">
                         <?php if (is_file(DATA_DIR . '/education/reception/' . $id . '/application.pdf')): ?>
                         <div class="col-md-12 m-b-20">
                             <a href="<?= HOME_URL ?>/<?= Reagordi::$app->options->get('url', 'admin_path') ?>/priem/entrant/<?= $id ?>?file=application#application.pdf"
@@ -188,7 +206,7 @@ $collector->any(
                         <div class="col-md-12 m-b-20">
                             <a href="<?= HOME_URL ?>/<?= Reagordi::$app->options->get('url', 'admin_path') ?>/priem/entrant/<?= $id ?>?file=passport#passport.pdf"
                                target="_blank">
-                                <span>Документ удоставиряющий личность (паспорт)</span>
+                                <span>Документ, удостоверяющий личность (паспорт)</span>
                                 <span>(1 Мб)</span>
                                 <span style="float: right"><?= date('d.m.Y H:i') ?></span>
                             </a>

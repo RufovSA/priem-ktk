@@ -58,7 +58,7 @@ $collector->any(
             $user_id = Entrant::addEntrant($_POST);
 
             // Новые
-            $_count = Entrant::countSpecialization(1, $_POST['specialtie1'], 0);
+            /*$_count = Entrant::countSpecialization(1, $_POST['specialtie1'], 0);
             $_type_certificate = 'copy';
             file_put_contents(DATA_DIR . '/education/rating/' . md5($_POST['specialtie1'] . '1') . '_' . $_type_certificate . '.tmp', $_count);
 
@@ -74,7 +74,7 @@ $collector->any(
             $_type_certificate = 'origin';
             file_put_contents(DATA_DIR . '/education/rating/' . md5($_POST['specialtie1'] . '2') . '_' . $_type_certificate . '.tmp', $_count);
 
-            Reagordi::$app->context->session->setFlash('finish', 1);
+            Reagordi::$app->context->session->setFlash('finish', 1);*/
             header('Location: ' . HOME_URL . '/' . Reagordi::$app->options->get('url', 'admin_path') . '/priem/entrant/' . $user_id . '#v-panel6');
             exit;
         }

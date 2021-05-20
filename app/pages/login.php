@@ -19,10 +19,17 @@ $collector->any('login.html', function () {
         time()) {
         ?>
         <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         <h1 class="text-center">Уважаемые абитуриенты!</h1>
-        <h3>Подать документы в ГАПОУ КО КТК через Личный кабинет абитуриента Вы
-            можете:</h3>
-        <h3>с <?php echo date(
+        <br/>
+        <br/>
+        <h3 class="text-center">Подать документы в ГАПОУ КО "КТК" через Личный кабинет абитуриента Вы
+            можете</h3>
+        <h3 class="text-center">с <?php echo date(
                 'd.m.Y: H:i',
                 Reagordi::$app->config->get(
                     'education',
@@ -30,7 +37,7 @@ $collector->any('login.html', function () {
                     'start_date'
                 )
             ); ?></h3>
-        <h3>до <?php echo date(
+        <h3 class="text-center">до <?php echo date(
                 'd.m.Y: H:i',
                 Reagordi::$app->config->get(
                     'education',
@@ -41,7 +48,7 @@ $collector->any('login.html', function () {
     <?php } else { ?>
         <form action="<?= HOME_URL ?>" method="post" class="form-signin"
               style="width:512px; margin: 0 auto">
-            <h2 class="text-center form-signin-heading">Войти в кабинет абитуриента:</h2>
+            <h2 class="text-center form-signin-heading">Войти в кабинет абитуриента</h2>
             <div class="form-group">
                 <label id="phone">Номер телефона</label>
                 <input type="text" name="phone" class="form-control bfh-phone"
