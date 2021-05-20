@@ -3,10 +3,11 @@
 /** @var $collector Phroute\Phroute\RouteCollector */
 
 use Reagordi\Framework\Web\View;
+use Reagordi\Education\Models\Entrant;
 
 $collector->any('login.html', function () {
-    Reagordi::$app->context->setTitle('Главная');
-    Reagordi::$app->context->setDescription('Описание главной страницы');
+    Reagordi::$app->context->setTitle('Вход на сайт');
+    Reagordi::$app->context->setDescription('Вход на сайт');
 
     if (Reagordi::$app->context->session->get('verify_offline') == Reagordi::$app->config->get('education', 'priem', 'key')) {
         header('Location: ' . HOME_URL . '/priem/statement.html');
@@ -46,9 +47,36 @@ $collector->any('login.html', function () {
                 )
             ); ?></h3>
     <?php } else { ?>
-        <form action="<?= HOME_URL ?>" method="post" class="form-signin"
+        <?php
+        $error = false;
+        if (Reagordi::$app->context->request->getPost('phone') && Reagordi::$app->context->request->getPost('password')) {
+            Reagordi::getInstance()->getApplication()->dbInit();
+            $user = Entrant::getUser(Reagordi::$app->context->request->getPost('phone'), Reagordi::$app->context->request->getPost('password'));
+            if ($user) {
+                Reagordi::$app->context->request->cookie->add('phone', Reagordi::$app->context->request->getPost('phone'));
+                Reagordi::$app->context->request->cookie->add('password', Reagordi::$app->context->request->getPost('password'));
+                header('Location: ' . HOME_URL . '/priem/lk');
+                exit();
+            }
+            $error = true;
+        }
+        ?>
+        <form action="<?= HOME_URL ?>/login.html" method="post" class="form-signin"
               style="width:512px; margin: 0 auto">
             <h2 class="text-center form-signin-heading">Войти в кабинет абитуриента</h2>
+            <?php if ($error): ?>
+                <div class="alert alert-danger alert-dismissable" style="color: #000">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <b>Не удаётся войти.</b><br>
+                    Пожалуйста, проверьте правильность написания <b>номера телефона</b> и <b>пароля</b>.<br>
+                    <ul>
+                        <li>Возможно, нажата клавиша <b>Caps Lock</b>?</li>
+                        <li>Может быть, у Вас включена неправильная <b>раскладка</b>? (русская или английская)</li>
+                        <li>Попробуйте набрать свой пароль в текстовом редакторе и <b>скопировать</b> в графу «Пароль»</li>
+                    </ul>
+                    Если Вы всё внимательно проверили, но войти всё равно не удается, обратитесь к Администратору сайта.
+                </div>
+            <?php endif ?>
             <div class="form-group">
                 <label id="phone">Номер телефона</label>
                 <input type="text" name="phone" class="form-control bfh-phone"
@@ -56,7 +84,7 @@ $collector->any('login.html', function () {
                        data-format="+7 (ddd) ddd dd - dd" required/>
             </div>
             <div class="form-group">
-                <label for="passport">Пароль</label>
+                <label for="password">Пароль</label>
                 <input type="password" id="password" name="password"
                        class="form-control" placeholder="Пароль"
                         required/>

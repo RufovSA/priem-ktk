@@ -160,8 +160,8 @@ if (!Reagordi::$app->context->request->isAjaxRequest()):
                     <?php endforeach ?>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <a href="<?= HOME_URL ?>/priem/statement.html">
-                        <button class="btn btn-success" style="margin-top:13px">Подать заявление</button>
+                    <a href="<?= HOME_URL ?>/login.html">
+                        <button class="btn btn-success" style="margin-top:13px">Войти / Подать заявление</button>
                     </a>
                 </ul>
             </div><!-- /.navbar-collapse -->

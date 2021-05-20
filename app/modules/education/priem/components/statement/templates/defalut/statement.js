@@ -48,7 +48,7 @@ function ep_form(e) {
 
     if ($('#rg_ep_act').attr('value') == '10') {
         var data = document_data;
-        alert();
+        //alert();
         //data.append('uploaded_application', $("#file-0b").file);
         //data.append('uploaded_passport', $("#file-1b").file);
         //data.append('uploaded_certificate', $("#file-2b").file);

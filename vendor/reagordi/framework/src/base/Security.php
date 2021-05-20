@@ -13,7 +13,7 @@ class Security
         return password_hash($password, PASSWORD_DEFAULT);
     }
 
-    public function validatePassword(string $password, string $hash): string
+    public function validatePassword($password, $hash)
     {
         return password_verify($password, $hash);
     }

@@ -8,6 +8,7 @@
 
 namespace Reagordi\Education\Models;
 
+use Reagordi;
 use RedBeanPHP\R;
 use RedBeanPHP\SimpleModel;
 
@@ -62,5 +63,12 @@ class Entrant extends SimpleModel
             'SELECT COUNT(`id`) FROM `' . DB_PREF . 'entrant` WHERE `type_doc_edu` = ? AND `specialtie1` = ? AND `type_certificate` = ? AND `entrant_status` = ?',
             [$class, $specialization, $type_certificate, '4']
         );
+    }
+
+    public static function getUser($phone, $password)
+    {
+        $user = R::findOne(DB_PREF . 'entrant', '`phone` = ?', [$phone]);
+        if ($user && Reagordi::$app->security->validatePassword($password, $user->password)) return $user;
+        return null;
     }
 }
