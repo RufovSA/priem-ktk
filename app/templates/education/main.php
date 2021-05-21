@@ -249,7 +249,7 @@ if (!Reagordi::$app->context->request->isAjaxRequest()):
 </div>
 <?php endif ?>
     <footer class="footer text-right"<?php if (!defined('RESPONSE_ADMIN') || !RESPONSE_ADMIN): ?> style="left:0"<?php endif ?>>
-        <a href="/"><?= Reagordi::getInstance()->getConfig()->get('site_name') ?></a> &copy; <?= date('Y') ?>. Все
+        <a href="https://vk.com/rufov" target="_blank">Разработал Руфов Сергей Алексеевич</a> &copy; <?= date('Y') ?>. Все
         права
         защищены
     </footer>
