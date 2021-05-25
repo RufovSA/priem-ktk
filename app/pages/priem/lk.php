@@ -9,6 +9,7 @@
  */
 
 use Reagordi\Education\Models\Entrant;
+use RedBeanPHP\R;
 
 /** @var $collector Phroute\Phroute\RouteCollector */
 
@@ -29,6 +30,8 @@ $collector->get('priem/lk.html', function () {
     }
 
     $user = is_auth();
+
+    R::find(DB_PREF . 'entrant', '`type_doc_edu` = ? AND `specialtie1` = ? AND `type_certificate` = ? ORDER BY `average_score` DESC', [$user->type_doc_edu, $user->specialtie1, '1']);
 
     ob_start();
     ?>
@@ -61,6 +64,24 @@ $collector->get('priem/lk.html', function () {
                 <button class="btn btn-success" style="margin-top:13px">Изменить заявление</button>
             </a>
         <?php endif ?>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center">Место в рейтинге</th>
+                    <th class="text-center">ФИО</th>
+                    <th class="text-center">Специальность</th>
+                    <th class="text-center">Средний балл</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center"></td>
+                    <td><?= $user->last_name ?> <?= $user->first_name ?> <?= $user->middle_name ?></td>
+                    <td><?= $user->specialtie1 ?></td>
+                    <td class="text-center"><?= $user->average_score ?></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
         <?php
         Reagordi::$app->context->view->assign('sitebar', true);

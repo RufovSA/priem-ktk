@@ -61,6 +61,7 @@ if (Reagordi::$app->context->request->getPost('email') &&
             'phone' => Reagordi::$app->context->request->getPost('phone'),
             'email' => Reagordi::$app->context->request->getPost('email'),
             'password' => $password,
+            'type_certificate' => 0,
             'entrant_status' => 0,
             'verify' => $verify,
         ),

@@ -375,7 +375,7 @@ $collector->any(
                             (<?php if ($post->type_certificate == '0'): ?> Копия<?php else: ?>Оригинал<?php endif ?>
                             )</td><?php endif ?>
                         <?php if (Reagordi::$app->context->server->getRequestMethod() != 'POST' || $request->get('view_average_score')): ?>
-                            <td class="text-center"><?= mb_substr($post->average_score, 0, 4) ?></td><?php endif ?>
+                            <td class="text-center"><?= mb_substr($post->average_score, 0, 5) ?></td><?php endif ?>
                         <?php if (Reagordi::$app->context->server->getRequestMethod() != 'POST' || $request->get('view_specialtie1')): ?>
                             <td><?= $post->specialtie1 ?></td><?php endif ?>
                         <?php if (Reagordi::$app->context->server->getRequestMethod() != 'POST' || $request->get('view_checkbox_obsaga')): ?>

@@ -8,21 +8,21 @@ $admin = isset($admin) ? $admin : false;
 $user = isset($user) ? $user : null;
 if (isset($entrant)) $user = $entrant;
 ?>
-<?php if ($user->copy_status_application): ?>
+<?php if (!isset($user->copy_status_application) || $user->copy_status_application): ?>
     <div class="form-group">
         <label for="file-0b">Заявление поступающего</label>
         <input id="file-0b" type="file" name="uploaded_application" class="form-control file"
                data-preview-file-type="any" onchange="ep_change_input_file(this);">
     </div>
 <?php endif ?>
-<?php if ($user->copy_status_passport): ?>
+<?php if (!isset($user->copy_status_passport) || $user->copy_status_passport): ?>
     <div class="form-group">
         <label for="file-1b">Документ, удостоверяющий личность (паспорт)</label>
         <input id="file-1b" type="file" name="uploaded_passport" class="form-control file"
                data-preview-file-type="any" onchange="ep_change_input_file(this);">
     </div>
 <?php endif ?>
-<?php if ($user->copy_status_certificate): ?>
+<?php if (!isset($user->copy_status_certificate) || $user->copy_status_certificate): ?>
     <div class="form-group">
         <label for="file-2b">Документ об образовании</label>
         <input id="file-2b" type="file" name="uploaded_certificate" class="form-control file"
