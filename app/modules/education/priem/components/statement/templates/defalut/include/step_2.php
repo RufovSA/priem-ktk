@@ -5,6 +5,9 @@
 /** @var Reagordi\Framework\Base\Server $sessions */
 
 $admin = isset($admin) ? $admin: false;
+$user = isset($user) ? $user: null;
+
+if (isset($entrant)) $user = $entrant;
 ?>
 <div class="form-group col-md-12">
     <label for="type_doc">Документ, удостоверяющий личность <span
@@ -70,3 +73,12 @@ $admin = isset($admin) ? $admin: false;
            name="passport_whom"<?php if (isset($_SESSION['passport_whom'])) { ?> value="<?php echo $_SESSION['passport_whom']; ?>"<?php } ?>
            placeholder="Кем выдан"/>
 </div>
+<?php if ($user): ?>
+    <?php if ($user->comment_2): ?><p><b class="color-red">Замечания</b> <?= str_replace("\n", '<br />', $user->comment_2) ?></p><?php endif ?>
+<?php endif ?>
+<?php if ($admin): ?>
+    <div class="form-group col-md-12">
+        <label for="comment_2">Заметки</label>
+        <textarea class="form-control" id="comment" name="comment_2"></textarea>
+    </div>
+<?php endif ?>

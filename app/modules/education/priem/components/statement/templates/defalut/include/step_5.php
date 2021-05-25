@@ -13,6 +13,8 @@ $status = array(
 );
 
 $admin = isset($admin) ? $admin: false;
+$user = isset($user) ? $user: null;
+if (isset($entrant)) $user = $entrant;
 
 $bdate = new DateTime(Reagordi::$app->context->session->get('bdate'));
 
@@ -177,3 +179,12 @@ unset($_t);
       'parents_two_work'
     )): ?> value="<?= $sessions->get('parents_two_work') ?>"<?php endif ?> />
 </div>
+<?php if ($user): ?>
+    <?php if ($user->comment_5): ?><p><b class="color-red">Замечания</b> <?= str_replace("\n", '<br />', $user->comment_5) ?></p><?php endif ?>
+<?php endif ?>
+<?php if ($admin): ?>
+    <div class="form-group col-md-12">
+        <label for="comment_5">Заметки</label>
+        <textarea class="form-control" id="comment" name="comment_5"></textarea>
+    </div>
+<?php endif ?>

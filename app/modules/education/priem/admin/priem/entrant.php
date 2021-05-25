@@ -80,6 +80,8 @@ $collector->any(
 
             $user_id = Entrant::addEntrant($_POST, $entrant->id);
 
+            Reagordi\Framework\IO\Directory::createDirectory(DATA_DIR . '/education/rating/');
+
             // Старые
             $_count = Entrant::countSpecialization(1, $entrant->specialtie1, 0);
             $_type_certificate = 'copy';
@@ -222,6 +224,35 @@ $collector->any(
                             </a>
                         </div>
                         <?php endif ?>
+                        <div class="form-group col-md-12">
+                            <label for="copy_status_application">Обновить скан заявленя</label>
+                            <select id="copy_status_application" name="copy_status_application" class="ep_addres">
+                                <option value="0" <?php if (isset($entrant) && $entrant->copy_status_application == '0'): ?> selected<?php endif ?>>Нет</option>
+                                <option value="1" <?php if (isset($entrant) && $entrant->copy_status_application == '1'): ?> selected<?php endif ?>>Да</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="copy_status_passport">Обновить скан паспорта</label>
+                            <select id="copy_status_passport" name="copy_status_passport" class="ep_addres">
+                                <option value="0" <?php if (isset($entrant) && $entrant->copy_status_passport == '0'): ?> selected<?php endif ?>>Нет</option>
+                                <option value="1" <?php if (isset($entrant) && $entrant->copy_status_passport == '1'): ?> selected<?php endif ?>>Да</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="copy_status_certificate">Обновить скан аттестата</label>
+                            <select id="copy_status_certificate" name="copy_status_certificate" class="ep_addres">
+                                <option value="0" <?php if (isset($entrant) && $entrant->copy_status_certificate == '0'): ?> selected<?php endif ?>>Нет</option>
+                                <option value="1" <?php if (isset($entrant) && $entrant->copy_status_certificate == '1'): ?> selected<?php endif ?>>Да</option>
+                            </select>
+                        </div>
+                        <?php if ($entrant): ?>
+                            <?php if ($entrant->comment_9): ?><p>
+                                <b class="color-red">Замечания</b> <?= str_replace("\n", '<br />', $entrant->comment_9) ?></p><br /><?php endif ?>
+                        <?php endif ?>
+                        <div class="form-group col-md-12">
+                            <label for="comment_9">Заметки</label>
+                            <textarea class="form-control" id="comment" name="comment_9"></textarea>
+                        </div>
                     </div>
                 </div>
             </div>

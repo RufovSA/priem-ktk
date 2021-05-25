@@ -5,6 +5,8 @@
 /** @var Reagordi\Framework\Base\Server $sessions */
 
 $admin = isset($admin) ? $admin: false;
+$user = isset($user) ? $user: null;
+if (isset($entrant)) $user = $entrant;
 
 $benefits_status = array(
   1 => 'Инвалид',
@@ -60,3 +62,12 @@ $language_status = array(
     <label for="checkbox_olimpiada">Победитель всероссийских олимпиад (член
         сборной)</label>
 </div>
+<?php if ($user): ?>
+    <?php if ($user->comment_7): ?><p><b class="color-red">Замечания</b> <?= str_replace("\n", '<br />', $user->comment_7) ?></p><?php endif ?>
+<?php endif ?>
+<?php if ($admin): ?>
+    <div class="form-group col-md-12">
+        <label for="comment_7">Заметки</label>
+        <textarea class="form-control" id="comment" name="comment_7"></textarea>
+    </div>
+<?php endif ?>

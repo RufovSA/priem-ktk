@@ -73,7 +73,7 @@ class CookieCollection
     public function remove($name)
     {
         unset($_COOKIE[RG_COOKIE_PREF . $name], $this->cookie[$name]);
-        $expires = time() - ($expires * 86400);
+        $expires = time() - 86400;
         if (Reagordi::$app->options->get('components', 'request', 'onlySSL')) setcookie(RG_COOKIE_PREF . $name, '', $expires, '/', DOMAIN, true, true);
         else setcookie(RG_COOKIE_PREF . $name, '', $expires, '/', DOMAIN, null, true);
         return true;

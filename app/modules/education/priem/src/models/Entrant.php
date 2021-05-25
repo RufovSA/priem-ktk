@@ -67,8 +67,8 @@ class Entrant extends SimpleModel
 
     public static function getUser($phone, $password)
     {
-        $user = R::findOne(DB_PREF . 'entrant', '`phone` = ?', [$phone]);
-        if ($user && Reagordi::$app->security->validatePassword($password, $user->password)) return $user;
+        $user = R::findOne(DB_PREF . 'entrant', '`phone` = ? and `password` = ?', [$phone, $password]);
+        if ($user) return $user;
         return null;
     }
 }

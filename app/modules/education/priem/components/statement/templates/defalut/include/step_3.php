@@ -11,6 +11,9 @@ use Reagordi\GeoVk\Regions;
 
 $admin = isset($admin) ? $admin: false;
 $admin_new = isset($admin_new) ? $admin_new: false;
+$user = isset($user) ? $user: null;
+
+if (isset($entrant)) $user = $entrant;
 
 $countri_id =
   Reagordi::$app->context->session->has('addres_passport_country') ?
@@ -245,3 +248,12 @@ $region_id =
       </div>
   <?php endif ?>
 </div>
+<?php if ($user): ?>
+    <?php if ($user->comment_3): ?><p><b class="color-red">Замечания</b> <?= str_replace("\n", '<br />', $user->comment_3) ?></p><?php endif ?>
+<?php endif ?>
+<?php if ($admin): ?>
+    <div class="form-group col-md-12">
+        <label for="comment_3">Заметки</label>
+        <textarea class="form-control" id="comment" name="comment_3"></textarea>
+    </div>
+<?php endif ?>

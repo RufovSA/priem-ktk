@@ -9,6 +9,16 @@ Reagordi::$app->context->i18n->loadComponentLangFile(__FILE__);
 
 $ar_params['page_url'] = isset($ar_params['page_url']) ? $ar_params['page_url'] : '/';
 
+$user = is_auth();
+
+if ($user) {
+    $sessions = Reagordi::$app->context->session;
+    foreach ($user as $key => $value) {
+        $sessions->set($key, $value);
+    }
+    $_SESSION['school_subject'] = json_decode($user->school_subject, true);
+}
+
 $verify = 0;
 if (Reagordi::$app->context->session->get('verify_offline') == Reagordi::$app->config->get('education', 'priem', 'key')) $verify = 1;
 
@@ -21,7 +31,7 @@ if (Reagordi::$app->context->request->getPost('update') == 1) {
     $act--;
 }
 
-if ($act == 1 && Reagordi::$app->context->session->get('user_id')) {
+if (!$user && $act == 1 && Reagordi::$app->context->session->get('user_id')) {
     $act = 2;
 }
 
@@ -80,6 +90,7 @@ if ($act > count($list_priem) || $act <= 0) {
     exit();
 }
 
+$this->view->assign('user', $user);
 $this->view->assign('verify', $verify);
 $this->view->assign('error', $error);
 $this->view->assign('act', $act);

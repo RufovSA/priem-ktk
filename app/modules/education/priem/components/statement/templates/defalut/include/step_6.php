@@ -5,6 +5,8 @@
 /** @var Reagordi\Framework\Base\Server $sessions */
 
 $admin = isset($admin) ? $admin: false;
+$user = isset($user) ? $user: null;
+if (isset($entrant)) $user = $entrant;
 
 $specialties = Reagordi::$app->config->get('education', 'priem', 'specialties');
 ?>
@@ -77,3 +79,12 @@ $specialties = Reagordi::$app->config->get('education', 'priem', 'specialties');
       <?php endforeach ?>
     </select>
 </div>
+<?php if ($user): ?>
+    <?php if ($user->comment_6): ?><p><b class="color-red">Замечания</b> <?= str_replace("\n", '<br />', $user->comment_6) ?></p><?php endif ?>
+<?php endif ?>
+<?php if ($admin): ?>
+    <div class="form-group col-md-12">
+        <label for="comment_6">Заметки</label>
+        <textarea class="form-control" id="comment" name="comment_6"></textarea>
+    </div>
+<?php endif ?>

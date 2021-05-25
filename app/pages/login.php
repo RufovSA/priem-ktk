@@ -16,8 +16,7 @@ $collector->any('login.html', function () {
 
     ob_start();
 
-    if (Reagordi::$app->config->get('education', 'priem', 'start_date') >
-        time()) {
+    if (Reagordi::$app->config->get('education', 'priem', 'start_date') > time()) {
         ?>
         <br/>
         <br/>
@@ -55,7 +54,7 @@ $collector->any('login.html', function () {
             if ($user) {
                 Reagordi::$app->context->request->cookie->add('phone', Reagordi::$app->context->request->getPost('phone'));
                 Reagordi::$app->context->request->cookie->add('password', Reagordi::$app->context->request->getPost('password'));
-                header('Location: ' . HOME_URL . '/priem/lk');
+                header('Location: ' . HOME_URL . '/priem/lk.html');
                 exit();
             }
             $error = true;

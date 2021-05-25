@@ -1,10 +1,19 @@
 <?php
 
+use Reagordi\Education\Models\Entrant;
 use Reagordi\Framework\Loader;
 use Reagordi\GeoVk\Cities;
 use Reagordi\GeoVk\Countries;
 use Reagordi\GeoVk\Regions;
 use Dompdf\Dompdf;
+
+function is_auth() {
+    $cookie = Reagordi::$app->context->request->cookie;
+    if (!isset($GLOBALS['rg_user']))
+        $GLOBALS['rg_user'] = Entrant::getUser($cookie->get('phone'), $cookie->get('password'));
+    if ($GLOBALS['rg_user']) return $GLOBALS['rg_user'];
+    return null;
+}
 
 function getEntrant($session) {
     \Dompdf\Autoloader::register();
@@ -54,6 +63,21 @@ function getEntrant($session) {
         'Отец',
         'Бабушка',
         'Дедушка',
+    );
+
+    $benefits_status = array(
+        1 => 'Инвалид',
+        'Сирота',
+        'Малоимущие',
+        'Справка ЧС',
+        'Многодетные',
+    );
+
+    $language_status = array(
+        1 => 'Английский язык',
+        'Немецкий язык',
+        'Французский язык',
+        '_________________',
     );
 
     $nc = new \NCLNameCaseRu();
@@ -265,9 +289,9 @@ function getEntrant($session) {
     <?php if (Reagordi::$app->context->session->has('checkbox_obsaga')): ?>
         <p><u>Нуждаюсь в общежитие</u></p>
     <?php endif ?>
-    <p><b>Иностранный язык</b>: <u><?= Reagordi::$app->context->session->get('foreign_language') ?></u></p>
-    <?php if (Reagordi::$app->context->session->get('benefits')): ?>
-        <p><b>При поступлении имею следующие льготы</b>: <u><?= Reagordi::$app->context->session->get('benefits') ?></u>
+    <p><b>Иностранный язык</b>: <u><?= isset($language_status[Reagordi::$app->context->session->get('foreign_language')]) ? $language_status[Reagordi::$app->context->session->get('foreign_language')]: '_________________' ?></u></p>
+    <?php if (Reagordi::$app->context->session->get('benefits') && isset($benefits_status[Reagordi::$app->context->session->get('benefits')])): ?>
+        <p><b>При поступлении имею следующие льготы</b>: <u><?= $benefits_status[Reagordi::$app->context->session->get('benefits')] ?></u>
         </p>
     <?php endif ?>
     <?php if (Reagordi::$app->context->session->get('doc_benefits')): ?>

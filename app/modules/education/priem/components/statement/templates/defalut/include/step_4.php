@@ -22,6 +22,8 @@ $subjects = array(
 $subject_i = 1;
 
 $admin = isset($admin) ? $admin: false;
+$user = isset($user) ? $user: null;
+if (isset($entrant)) $user = $entrant;
 ?>
 <div class="form-group col-md-12">
     <label for="type_doc_edu">Тип документа <span class="color-red">*</span></label>
@@ -140,4 +142,12 @@ $admin = isset($admin) ? $admin: false;
         </tbody>
     </table>
 </div>
-
+<?php if ($user): ?>
+    <?php if ($user->comment_4): ?><p><b class="color-red">Замечания</b> <?= str_replace("\n", '<br />', $user->comment_4) ?></p><?php endif ?>
+<?php endif ?>
+<?php if ($admin): ?>
+    <div class="form-group col-md-12">
+        <label for="comment_4">Заметки</label>
+        <textarea class="form-control" id="comment" name="comment_4"></textarea>
+    </div>
+<?php endif ?>

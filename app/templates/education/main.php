@@ -2,6 +2,10 @@
 
 use Reagordi\Framework\Web\Asset;
 
+Reagordi::getInstance()->getApplication()->dbInit();
+
+$user = is_auth();
+
 if (!Reagordi::$app->context->request->isAjaxRequest()):
     ?>
     <!DOCTYPE html>
@@ -160,9 +164,18 @@ if (!Reagordi::$app->context->request->isAjaxRequest()):
                     <?php endforeach ?>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <a href="<?= HOME_URL ?>/login.html">
-                        <button class="btn btn-success" style="margin-top:13px">Войти / Подать заявление</button>
-                    </a>
+                    <?php if ($user): ?>
+                        <a href="<?= HOME_URL ?>/priem/lk.html">
+                            <button class="btn btn-success" style="margin-top:13px">Личный кабинет</button>
+                        </a>
+                        <a href="<?= HOME_URL ?>/priem/lk.html?logout=1">
+                            <button class="btn btn-danger" style="margin-top:13px">Выход</button>
+                        </a>
+                    <?php else: ?>
+                        <a href="<?= HOME_URL ?>/login.html">
+                            <button class="btn btn-success" style="margin-top:13px">Войти / Подать заявление</button>
+                        </a>
+                    <?php endif ?>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

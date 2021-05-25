@@ -7,6 +7,7 @@
  */
 
 /** @var integer $verify */
+/** @var object $user */
 
 use Reagordi\Education\Models\Entrant;
 
@@ -24,19 +25,22 @@ if (Reagordi::$app->context->request->getPost('password') &&
 if (Reagordi::$app->context->request->getPost('email') &&
     !Reagordi::$app->context->session->get('user_id')) {
 
-    if (Entrant::isEmail(Reagordi::$app->context->request->getPost('email'))) {
+    $id = null;
+    if (is_auth()) {
+        $id = $user->id;
+    }
+
+    if (!$id && Entrant::isEmail(Reagordi::$app->context->request->getPost('email'))) {
         $error[] = 'Данный E-Mail уже зарегистрирован';
     }
 
-    if (Entrant::isPhone(Reagordi::$app->context->request->getPost('phone'))) {
+    if (!$id && Entrant::isPhone(Reagordi::$app->context->request->getPost('phone'))) {
         $error[] =
             'Данный номер телефона уже зарегистрирован уже зарегистрирован';
     }
 
-    $password =
-        Reagordi::$app->security->generatePasswordHash(
-            Reagordi::$app->context->request->getPost('password')
-        );
+    $password = Reagordi::$app->context->request->getPost('password');
+
     $user_id = Entrant::addEntrant(
         array(
             'last_name' => Reagordi::$app->context->request->getPost('last_name'),
@@ -59,7 +63,8 @@ if (Reagordi::$app->context->request->getPost('email') &&
             'password' => $password,
             'entrant_status' => 0,
             'verify' => $verify,
-        )
+        ),
+        $id
     );
     if ($user_id) {
         Reagordi::$app->context->session->set('user_id', $user_id);
