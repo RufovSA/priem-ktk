@@ -13,7 +13,33 @@ $collector->any('', function () {
 
     ob_start();
     ?>
-    <a href="<?= HOME_URL ?>/<?= Reagordi::$app->options->get('url', 'admin_path') ?>/priem/statement.html">Заявления абитуриентов</a>
+    <button type="button" class="btn btn-default waves-effect" onclick="cron();">Пересчёт рейтинга для абитуриентов
+    </button>
+    <script>
+        function ep_loader(st) {
+            if (st === false) {
+                document.body.style.overflow = 'auto';
+                document.getElementById('rde_load').style.display = 'none';
+            } else {
+                document.body.style.overflow = 'hidden';
+                document.getElementById('rde_load').style.display = 'block';
+            }
+        }
+
+        function cron() {
+            ep_loader(true);
+            $.ajax({
+                url: '<?= HOME_URL ?>/priem/cron.html?key=<?= Reagordi::$app->config->get('education', 'priem', 'key') ?>',
+                method: 'get',
+                headers: {
+                    "Reagordi-Ajax": 'XMLHttpRequest'
+                },
+                success: function (data) {
+                    ep_loader(false);
+                }
+            });
+        }
+    </script>
     <?php
     Reagordi::$app->context->view->assign('conteiner', ob_get_clean());
 
