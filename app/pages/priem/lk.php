@@ -31,8 +31,6 @@ $collector->get('priem/lk.html', function () {
 
     $user = is_auth();
 
-    R::find(DB_PREF . 'entrant', '`type_doc_edu` = ? AND `specialtie1` = ? AND `type_certificate` = ? ORDER BY `average_score` DESC', [$user->type_doc_edu, $user->specialtie1, '1']);
-
     ob_start();
     ?>
     <div class="card-box table-responsive">
@@ -52,40 +50,71 @@ $collector->get('priem/lk.html', function () {
         </h2>
         <?php if ($user->entrant_status == '3'): ?>
             <h3>Замечания</h3>
-            <?php if ($user->comment_1): ?><p><b>Шаг 1.</b> <?= str_replace("\n", '<br />', $user->comment_1) ?></p><?php endif ?>
-            <?php if ($user->comment_2): ?><p><b>Шаг 2.</b> <?= str_replace("\n", '<br />', $user->comment_2) ?></p><?php endif ?>
-            <?php if ($user->comment_3): ?><p><b>Шаг 3.</b> <?= str_replace("\n", '<br />', $user->comment_3) ?></p><?php endif ?>
-            <?php if ($user->comment_4): ?><p><b>Шаг 4.</b> <?= str_replace("\n", '<br />', $user->comment_4) ?></p><?php endif ?>
-            <?php if ($user->comment_5): ?><p><b>Шаг 5.</b> <?= str_replace("\n", '<br />', $user->comment_5) ?></p><?php endif ?>
-            <?php if ($user->comment_6): ?><p><b>Шаг 6.</b> <?= str_replace("\n", '<br />', $user->comment_6) ?></p><?php endif ?>
-            <?php if ($user->comment_7): ?><p><b>Шаг 7.</b> <?= str_replace("\n", '<br />', $user->comment_7) ?></p><?php endif ?>
-            <?php if ($user->comment_9): ?><p><b>Шаг 9.</b> <?= str_replace("\n", '<br />', $user->comment_9) ?></p><?php endif ?>
+            <?php if ($user->comment_1): ?><p><b>Шаг 1.</b> <?= str_replace("\n", '<br />', $user->comment_1) ?>
+                </p><?php endif ?>
+            <?php if ($user->comment_2): ?><p><b>Шаг 2.</b> <?= str_replace("\n", '<br />', $user->comment_2) ?>
+                </p><?php endif ?>
+            <?php if ($user->comment_3): ?><p><b>Шаг 3.</b> <?= str_replace("\n", '<br />', $user->comment_3) ?>
+                </p><?php endif ?>
+            <?php if ($user->comment_4): ?><p><b>Шаг 4.</b> <?= str_replace("\n", '<br />', $user->comment_4) ?>
+                </p><?php endif ?>
+            <?php if ($user->comment_5): ?><p><b>Шаг 5.</b> <?= str_replace("\n", '<br />', $user->comment_5) ?>
+                </p><?php endif ?>
+            <?php if ($user->comment_6): ?><p><b>Шаг 6.</b> <?= str_replace("\n", '<br />', $user->comment_6) ?>
+                </p><?php endif ?>
+            <?php if ($user->comment_7): ?><p><b>Шаг 7.</b> <?= str_replace("\n", '<br />', $user->comment_7) ?>
+                </p><?php endif ?>
+            <?php if ($user->comment_9): ?><p><b>Шаг 9.</b> <?= str_replace("\n", '<br />', $user->comment_9) ?>
+                </p><?php endif ?>
             <a href="<?= HOME_URL ?>/priem/statement.html">
                 <button class="btn btn-success" style="margin-top:13px">Изменить заявление</button>
             </a>
         <?php endif ?>
-        <table class="table table-striped table-bordered">
-            <thead>
+        <?php if ($user->entrant_status == '4'): ?>
+            <?php
+            $place_1 = null;
+            $file = DATA_DIR . '/education/specialties/' . md5($user->specialtie1 . $user->type_doc_edu) . '.tmp';
+            if (is_file($file)) {
+                $file = json_decode(file_get_contents($file), true);
+                if (is_array($file)) {
+                    $i = 1;
+                    foreach ($file as $f) {
+                        if ($user->type_certificate == '1' && $f['id'] == $user->id) {
+                            $place_1 = $i;
+                            break;
+                        } elseif ($f['average_score'] <= $user->average_score) {
+                            $place_1 = $i;
+                            break;
+                        }
+                        $i++;
+                    }
+                }
+                //$type_certificate = $user->type_certificate;
+            }
+            ?>
+            <table class="table table-striped table-bordered">
+                <thead>
                 <tr>
                     <th class="text-center">Место в рейтинге</th>
                     <th class="text-center">ФИО</th>
                     <th class="text-center">Специальность</th>
                     <th class="text-center">Средний балл</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <tr>
-                    <td class="text-center"></td>
+                    <td class="text-center"><?= $place_1 ?></td>
                     <td><?= $user->last_name ?> <?= $user->first_name ?> <?= $user->middle_name ?></td>
                     <td><?= $user->specialtie1 ?></td>
                     <td class="text-center"><?= $user->average_score ?></td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        <?php endif ?>
     </div>
-        <?php
-        Reagordi::$app->context->view->assign('sitebar', true);
-        Reagordi::$app->context->view->assign('conteiner', ob_get_clean());
+    <?php
+    Reagordi::$app->context->view->assign('sitebar', true);
+    Reagordi::$app->context->view->assign('conteiner', ob_get_clean());
 
-        return Reagordi::$app->context->view->fech();
-    });
+    return Reagordi::$app->context->view->fech();
+});
