@@ -113,6 +113,8 @@ $collector->any(
             $params[] = $request->get('type_certificate');
         }
 
+        $where .= ' ORDER BY `average_score` DESC';
+
         $statement = Entrant::getList($where, $params);
 
         $benefits_status = array(
@@ -364,9 +366,10 @@ $collector->any(
                 </tr>
                 </thead>
                 <tbody>
+                <?php $i = 1; ?>
                 <?php foreach ($statement as $post): ?>
                     <tr>
-                        <td><?= $post->id ?></td>
+                        <td><?= $i ?></td>
                         <td>
                             <a href="<?= HOME_URL ?>/<?= Reagordi::$app->options->get('url', 'admin_path') ?>/priem/entrant/<?= $post->id ?>"><?= $post->last_name ?> <?= $post->first_name ?> <?= $post->middle_name ?></a>
                         </td>
@@ -401,6 +404,7 @@ $collector->any(
                             </td>
                         <?php endif ?>
                     </tr>
+                    <?php $i++ ?>
                 <?php endforeach ?>
                 </tbody>
             </table>
