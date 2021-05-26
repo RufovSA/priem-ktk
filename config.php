@@ -11,7 +11,7 @@
  *
  * @var string
  */
-define('REAGORDI_ENV', 'dev');
+define('REAGORDI_ENV', 'prod');
 
 /**
  * Показ выполненных запросов

@@ -90,6 +90,10 @@ if (isset($entrant)) $user = $entrant;
            placeholder="Повторите пароль"<?php if ($user): ?> value="<?= $user->password ?>"<?php endif ?> required/>
 </div>
 <?php endif ?>
+<?php if (!$admin && !$user): ?>
+    <p class="color-red">Внимание! Пожалуйста, проверьте внимательно все введённые данные. На
+        следующем шаге их изменить будет невозможно.</p><br />
+<?php endif ?>
 <?php if ($user): ?>
     <?php if ($user->comment_1): ?><p><b class="color-red">Замечания</b> <?= str_replace("\n", '<br />', $user->comment_1) ?></p><?php endif ?>
 <?php endif ?>
