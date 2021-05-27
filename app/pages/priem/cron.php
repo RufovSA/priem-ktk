@@ -26,6 +26,14 @@ $collector->get('priem/cron.html', function () {
 
     foreach (Reagordi::$app->config->get('education', 'priem', 'specialties') as $faculty) {
         foreach ($faculty['value'] as $specialization) {
+            $_count = Entrant::countSpecialization($specialization['class'], $specialization['name'], 0);
+            file_put_contents(DATA_DIR . '/education/rating/' . md5($specialization['name'] . $specialization['class']) . '_copy.tmp', $_count);
+            @chmod(DATA_DIR . '/education/rating/' . md5($specialization['name'] . $specialization['class']) . '_copy.tmp', 0644);
+
+            $_count = Entrant::countSpecialization($specialization['class'], $specialization['name'], 1);
+            file_put_contents(DATA_DIR . '/education/rating/' . md5($specialization['name'] . $specialization['class']) . '_origin.tmp', $_count);
+            @chmod(DATA_DIR . '/education/rating/' . md5($specialization['name'] . $specialization['class']) . '_origin.tmp', 0644);
+
             $data = R::find(DB_PREF . 'entrant', '`type_doc_edu` = ? AND `specialtie1` = ? AND `type_certificate` = ? AND `entrant_status` = ? ORDER BY `average_score` DESC', [$specialization['class'], $specialization['name'], '1', '4']);
             $new_data = [];
             foreach ($data as $d) {
