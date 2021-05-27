@@ -32,4 +32,5 @@ Desktop.ini
 composer.lock
 
 # Reagordi File #
+app/php_interface/db.php
 data/
