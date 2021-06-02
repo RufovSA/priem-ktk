@@ -28,6 +28,8 @@ if (!Reagordi::$app->context->request->isAjaxRequest()):
 
         <link rel="shortcut icon" href="<?= Asset::getInstance()->addFileUrl(TEMPLATE_URL . '/favicon.ico') ?>"/>
 
+        <link rel="manifest" href="<?= Asset::getInstance()->addFileUrl(TEMPLATE_URL . '/manifest.json') ?>">
+
     </head>
     <body class="fixed-left">
     <div id="rde_load">
@@ -244,14 +246,16 @@ if (!Reagordi::$app->context->request->isAjaxRequest()):
         <h2>ВОПРОСЫ В ПРИЕМНУЮ КОМИССИЮ</h2>
         <p>Секретарь приёмной комиссии</p>
         <p>Михалева Снежана Александровна</p>
-        <p><b>Пн — Пт, 08.30 — 16.30</b></p>
-        <p>(4842) 52-17-03,</p>
+        <p><b>Пн — Пт, 08.30 — 16.00</b></p>
         <p>(4842) 52-18-34</p>
+        <p>(4842) 52-17-03</p>
+
+        <a href="<?= HOME_URL ?>/uploads/manual.pdf" target="_blank">Инструкция по подаче заявления на поступление удалённо</a>
     </div>
     <hr />
     <div>
-        <h2>КАК НАС НАЙТИ</h2>
-        <p>г. Калуга, ул. Грабцевское шоссе, 126</p><br />
+        <h2>АДРЕС ПРИЕМНОЙ КОММИСИИ</h2>
+        <p>г. Калуга, ул. Грабцевское шоссе, 126, 1 этаж</p><br />
         <p>Микрорайон «Тайфун»</p>
         <p>Маршрутный автобус №77</p>
         <p>Остановка «Лицей №22» (конечная)</p>
@@ -262,9 +266,12 @@ if (!Reagordi::$app->context->request->isAjaxRequest()):
 </div>
 <?php endif ?>
     <footer class="footer text-right"<?php if (!defined('RESPONSE_ADMIN') || !RESPONSE_ADMIN): ?> style="left:0"<?php endif ?>>
-        <a href="https://vk.com/rufov" target="_blank">Разработал Руфов Сергей Алексеевич</a> &copy; <?= date('Y') ?>. Все
+		<p class="text-center"><a href="https://ktk40.ru" target="_blank">ГАПОУ КО "КТК"</a> &copy; <?= date('Y') ?>. Все
         права
-        защищены
+        защищены</p>
+        <p class="text-center">
+			<a href="https://vk.com/rufow" target="_blank">Разработал Руфов Сергей Алексеевич</a>
+		</p>
     </footer>
 
     </div>

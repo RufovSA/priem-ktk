@@ -25,10 +25,7 @@ $collector->any('pravila-priyoma.html', function () {
                 <a href="#vmy-tab-2" data-toggle="tab">Шаг 2</a>
             </li>
             <li>
-                <a href="#vmy-tab-3" data-toggle="tab">Шаг 3</a>
-            </li>
-            <li>
-                <a href="#vmy-tab-4" data-toggle="tab">Шаг 4</a>
+                <a href="#vmy-tab-4" data-toggle="tab">Шаг 3</a>
             </li>
         </ul>
         <div class="tab-content" style="width:100%">
@@ -37,10 +34,15 @@ $collector->any('pravila-priyoma.html', function () {
                 <p style="text-align: left;"><strong>Документы можно подать следующими способами:</strong></p>
 
                 <ol>
-                    <li><u>Самый предпочтительный способ</u>.
+                    <li><u>Самый предпочтительный способ</u>. Подача документов лично </li>
+                    <li>
+                        <a href="<?= HOME_URL ?>/priem/statement.html">Подача докуметов удалённо</a>
                         В электронной форме (документ на бумажном носителе, преобразованный в электронную форму путём
-                        сканирования или фотографирования с обеспечением машиночитаемого распознавания его реквизитов):
-                        посредством электронной почты организации (<a href="mailto:priem.ktk@yandex.ru">priem.ktk@yandex.ru</a>)
+                        сканирования или фотографирования с обеспечением машиночитаемого распознавания его реквизитов).
+                        <p class="color-red"><b>Внимание!</b> Документы поданные удалённо считаются копиями. Зачисление производится только по оригиналу аттестата.</p>
+                        <p>
+                            <a href="<?= HOME_URL ?>/uploads/manual.pdf" target="_blank">Инструкция по подаче заявления на поступление удалённо</a>
+                        </p>
                     </li>
                     <li>Через операторов почтовой связи общего доступа &nbsp;по адресу:
                         248009, Калужская область, г. Калуга, ул. Грабцевское шоссе, д. 126
@@ -79,15 +81,6 @@ $collector->any('pravila-priyoma.html', function () {
                 <strong><u>Соблюдайте меры предосторожности, а именно: </u></strong>
 
                 <strong>наличие&nbsp; маски, перчаток,&nbsp; дистанция&nbsp; 2 метра между посетителями!</strong>
-            </div>
-            <div class="tab-pane" id="vmy-tab-3">
-                <h3 style="text-align: center;"><strong>Отправляем удобным способом</strong></h3>
-                После получения заявления о приёме&nbsp; приемная комиссия&nbsp; в электронной форме или с помощью
-                операторов почтовой связи общего пользования информирует поступающего о необходимости для зачисления в
-                организацию предоставить уведомление о намерении обучаться и о сроках его представления. Уведомление
-                <strong>(<a href="<?= HOME_URL ?>/uploads/uvedomlenie-o-namerenii-obuchatsya.pdf">Бланк
-                        уведомления</a></strong>) о намерении обучаться подаётся поступающим&nbsp; по электронной почте
-                <strong>(</strong><a href="mailto:priem.ktk@yandex.ru"><strong>priem</strong><strong>.</strong><strong>ktk</strong><strong>@</strong><strong>yandex</strong><strong>.</strong><strong>ru</strong></a><strong>)</strong>
             </div>
             <div class="tab-pane" id="vmy-tab-4">
                 <h3 style="text-align: center;"><strong>Зачисление</strong></h3>

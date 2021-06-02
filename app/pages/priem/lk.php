@@ -73,6 +73,9 @@ $collector->get('priem/lk.html', function () {
         <?php if ($user->entrant_status == '4'): ?>
             <?php
             $place_1 = null;
+            $place_2 = null;
+            $place_3 = null;
+
             $file = DATA_DIR . '/education/specialties/' . md5($user->specialtie1 . $user->type_doc_edu) . '.tmp';
             if (is_file($file)) {
                 $file = json_decode(file_get_contents($file), true);
@@ -89,13 +92,65 @@ $collector->get('priem/lk.html', function () {
                         $i++;
                     }
                 }
-                //$type_certificate = $user->type_certificate;
+            }
+
+            if ($user->specialtie2 != '' && $user->specialtie2 != 'Выбор специальности') {
+                $file = DATA_DIR . '/education/specialties/' . md5($user->specialtie2 . $user->type_doc_edu) . '.tmp';
+                if (is_file($file)) {
+                    $file = json_decode(file_get_contents($file), true);
+                    if (is_array($file)) {
+                        $i = 1;
+                        foreach ($file as $f) {
+                            if ($f['average_score'] <= $user->average_score) {
+                                $place_2 = $i;
+                                break;
+                            }
+                            $i++;
+                        }
+                    }
+                }
+            }
+
+            if ($user->specialtie3 != '' && $user->specialtie3 != 'Выбор специальности') {
+                $file = DATA_DIR . '/education/specialties/' . md5($user->specialtie3 . $user->type_doc_edu) . '.tmp';
+                if (is_file($file)) {
+                    $file = json_decode(file_get_contents($file), true);
+                    if (is_array($file)) {
+                        $i = 1;
+                        foreach ($file as $f) {
+                            if ($f['average_score'] <= $user->average_score) {
+                                $place_3 = $i;
+                                break;
+                            }
+                            $i++;
+                        }
+                    }
+                }
+            }
+
+            $c_1 = null;
+            $c_2 = null;
+            $c_3 = null;
+
+            foreach (Reagordi::$app->config->get('education', 'priem', 'specialties') as $faculty) {
+                foreach ($faculty['value'] as $specialization) {
+                    if ($user->type_doc_edu == $specialization['class'] && $user->specialtie1 == $specialization['name']) {
+                        $c_1 = $specialization['count'];
+                    }
+                    if ($user->type_doc_edu == $specialization['class'] && $user->specialtie2 == $specialization['name']) {
+                        $c_2 = $specialization['count'];
+                    }
+                    if ($user->type_doc_edu == $specialization['class'] && $user->specialtie3 == $specialization['name']) {
+                        $c_3 = $specialization['count'];
+                    }
+                }
             }
             ?>
             <table class="table table-striped table-bordered">
                 <thead>
                 <tr>
                     <th class="text-center">Место в рейтинге</th>
+                    <th class="text-center">Бюджетных мест</th>
                     <th class="text-center">ФИО</th>
                     <th class="text-center">Специальность</th>
                     <th class="text-center">Средний балл</th>
@@ -104,10 +159,34 @@ $collector->get('priem/lk.html', function () {
                 <tbody>
                 <tr>
                     <td class="text-center"><?= $place_1 ?></td>
+                    <td class="text-center"><?= $c_1 ?></td>
                     <td><?= $user->last_name ?> <?= $user->first_name ?> <?= $user->middle_name ?></td>
                     <td><?= $user->specialtie1 ?></td>
                     <td class="text-center"><?= $user->average_score ?></td>
                 </tr>
+                <?php if (($user->specialtie2 != '' && $user->specialtie2 != 'Выбор специальности') || ($user->specialtie3 != '' && $user->specialtie3 != 'Выбор специальности')): ?>
+                <tr>
+                    <th colspan="4">Дополнительные специальности</th>
+                </tr>
+                <?php endif ?>
+                <?php if ($user->specialtie2 != '' && $user->specialtie2 != 'Выбор специальности'): ?>
+                <tr>
+                    <td class="text-center"><?= $place_2 ?></td>
+                    <td class="text-center"><?= $c_2 ?></td>
+                    <td><?= $user->last_name ?> <?= $user->first_name ?> <?= $user->middle_name ?></td>
+                    <td><?= $user->specialtie2 ?></td>
+                    <td class="text-center"><?= $user->average_score ?></td>
+                </tr>
+                <?php endif ?>
+                <?php if ($user->specialtie3 != '' && $user->specialtie3 != 'Выбор специальности'): ?>
+                <tr>
+                    <td class="text-center"><?= $place_3 ?></td>
+                    <td class="text-center"><?= $c_3 ?></td>
+                    <td><?= $user->last_name ?> <?= $user->first_name ?> <?= $user->middle_name ?></td>
+                    <td><?= $user->specialtie3 ?></td>
+                    <td class="text-center"><?= $user->average_score ?></td>
+                </tr>
+                <?php endif ?>
                 </tbody>
             </table>
         <?php endif ?>

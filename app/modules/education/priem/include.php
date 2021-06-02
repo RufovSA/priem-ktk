@@ -15,7 +15,7 @@ function is_auth() {
     return null;
 }
 
-function getEntrant($session) {
+function getEntrant($session, $admin = false) {
     \Dompdf\Autoloader::register();
 
     ob_start();
@@ -425,7 +425,9 @@ function getEntrant($session) {
     $c = str_replace('{parent_pass}', $session->get('parents_one_passport_whom') . ' ' . date('d.m.Y', $_date), $c);
     echo $c;
     ?>
-
+    <?php if ($admin || $session->get('verify')): ?>
+        <div style="page-break-before: always;"></div>
+    <?php endif ?>
     <?php if (Reagordi::$app->context->session->has('checkbox_obsaga')): ?>
         <div style="page-break-before: always;"></div>
         <div style="float: right;width: 50%">Директору ГАПОУ КО «КТК» А.В.Никитину<br/>
@@ -465,6 +467,68 @@ function getEntrant($session) {
         <div align="right" style="font-size: 8px">(подпись)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(расшифровка
             подписи)
         </div>
+        <?php if ($admin || $session->get('verify')): ?>
+            <div style="page-break-before: always;"></div>
+        <?php endif ?>
+    <?php endif ?>
+    <?php if ($admin || $session->get('verify')): ?>
+        <div style="page-break-before: always;"></div>
+    <h2 align="center">ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ПРОФЕССИОНАЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ
+        КАЛУЖСКОЙ ОБЛАСТИ
+        «КАЛУЖСКИЙ ТЕХНИЧЕСКИЙ КОЛЛЕДЖ»<br />
+        (ГАПОУ КО «КТК»)
+    </h2>
+    <h3 align="center">РАСПИСКА</h3>
+    <p>от <u><?= $nc->q($session->get('last_name') . ' ' . $session->get('first_name') . ' ' . $session->get('middle_name'), \NCL::$RODITLN) ?></u></p>
+    <p>на специальность (профессию) <u><?= Reagordi::$app->context->session->get('specialtie1') ?></u></p>
+    <h3 align="center">ПРИНЯТЫ ДОКУМЕНТЫ</h3>
+    <ol>
+        <li>Заявление абитуриента</li>
+        <li>Ксерокопия паспорта</li>
+        <li>Аттестат (без корочки) и приложение к нему №<u><?= Reagordi::$app->context->session->get('edu_series_num') ?></u> от "__" __________ 20__ г.,
+            <u>
+        <?php if (isset($entrant) && $entrant->type_certificate == '0'): ?>
+        Копия
+        <?php else: ?>
+        Оригинал
+        <?php endif ?>
+            </u>
+        </li>
+        <li>Фотография (3x4) ______ шт.</li>
+    </ol>
+    <div align="right">Принял документы секретарь приёмной комисии ___________</div>
+    <div align="right" style="font-size: 8px">(подпись)</div>
+    <p align="right">"__" __________ 20__ г.</p>
+    <p align="right">М.П.</p>
+    <p>_____________________________________________________________________________________________________________________</p>
+
+        <h2 align="center">ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ПРОФЕССИОНАЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ
+            КАЛУЖСКОЙ ОБЛАСТИ
+            «КАЛУЖСКИЙ ТЕХНИЧЕСКИЙ КОЛЛЕДЖ»<br />
+            (ГАПОУ КО «КТК»)
+        </h2>
+        <h3 align="center">РАСПИСКА</h3>
+        <p>от <u><?= $nc->q($session->get('last_name') . ' ' . $session->get('first_name') . ' ' . $session->get('middle_name'), \NCL::$RODITLN) ?></u></p>
+        <p>на специальность (профессию) <u><?= Reagordi::$app->context->session->get('specialtie1') ?></u></p>
+        <h3 align="center">ПРИНЯТЫ ДОКУМЕНТЫ</h3>
+        <ol>
+            <li>Заявление абитуриента</li>
+            <li>Ксерокопия паспорта</li>
+            <li>Аттестат (без корочки) и приложение к нему №<u><?= Reagordi::$app->context->session->get('edu_series_num') ?></u> от "__" __________ 20__ г.,
+                <u>
+                    <?php if (isset($entrant) && $entrant->type_certificate == '0'): ?>
+                        Копия
+                    <?php else: ?>
+                        Оригинал
+                    <?php endif ?>
+                </u>
+            </li>
+            <li>Фотография (3x4) ______ шт.</li>
+        </ol>
+        <div align="right">Принял документы секретарь приёмной комисии ___________</div>
+        <div align="right" style="font-size: 8px">(подпись)</div>
+        <p align="right">"__" __________ 20__ г.</p>
+        <p align="right">М.П.</p>
     <?php endif ?>
     </body>
     </html>

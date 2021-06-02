@@ -7,8 +7,8 @@
  */
 
 return [
-  'dsn' => 'mysql:host=localhost;dbname=reagordi',
-  'username' => 'root',
-  'password' => 'root',
+  'dsn' => 'mysql:host=localhost;dbname=priem',
+  'username' => 'priem',
+  'password' => 'N&2x14)5&(EbiL3e',
   'prefix' => 'rg_'
 ];

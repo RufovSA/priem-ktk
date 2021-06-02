@@ -61,7 +61,9 @@ $collector->any(
         $_SESSION['school_subject'] = json_decode($entrant->school_subject, true);
 
         if (Reagordi::$app->context->request->getQuery('act') == 'entrant.pdf') {
-            getEntrant($sessions);
+            Reagordi::$app->context->session->set('user_id', $id);
+            getEntrant($sessions, true);
+            Reagordi::$app->context->session->remove('user_id');
             exit;
         }
 

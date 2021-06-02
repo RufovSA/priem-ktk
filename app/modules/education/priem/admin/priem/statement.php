@@ -86,12 +86,13 @@ $collector->any(
         $params = [];
         $request = Reagordi::$app->context->request;
 
-        $where .= '`entrant_status` = ?';
-        $entrant_status = '2';
+        $entrant_status = null;
         if (!is_null($request->get('entrant_status')) && $request->get('entrant_status') >= 0 && $request->get('entrant_status') < 5) {
+            $where .= '`entrant_status` = ?';
+            //$entrant_status = '2';
             $entrant_status = $request->get('entrant_status');
+            $params[] = $entrant_status;
         }
-        $params[] = $entrant_status;
 
         if ($request->get('type_doc_edu')) {
             $where .= ' AND `type_doc_edu` = ?';
@@ -194,6 +195,21 @@ $collector->any(
             </div><br/>
         <?php endif ?>
 
+        <div>Перейти на заявление абитуриента №</div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><?= date('Y') ?>_</span>
+                        <input type="text" id="id_statement" class="form-control" placeholder="Идентификатор заявления" aria-describedby="basic-addon1" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-default" onclick="redirect_statement();">Перейти</button>
+                </div>
+            </div>
+
+        <br />
+
         <div id="rg_filter_statement" class="modal fade in" aria-labelledby="full-width-modalLabel" tabindex="-1"
              aria-labelledby="myModalLabel">
             <div class="modal-dialog">
@@ -275,6 +291,7 @@ $collector->any(
                             <div class="form-group col-sm-12">
                                 <label class="control-label" for="entrant_status">Статус заявления</label>
                                 <select id="entrant_status" name="entrant_status" class="ep_addres">
+                                    <option>Все</option>
                                     <option value="0"<?php if ($entrant_status == '0'): ?> selected<?php endif ?>>
                                         Пустая
                                     </option>
@@ -410,6 +427,13 @@ $collector->any(
             </table>
         </div>
         <script>
+            function redirect_statement() {
+                var a = document.getElementById('id_statement').value;
+                if (a != '') {
+                    document.location.href = '<?= HOME_URL ?>/<?= Reagordi::$app->options->get('url', 'admin_path') ?>/priem/entrant/' + a;
+                }
+            }
+
             window.onload = function () {
                 $('#datatable').dataTable();
                 TableManageButtons.init();

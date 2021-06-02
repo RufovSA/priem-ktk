@@ -10,7 +10,7 @@ Options -Includes +FollowSymlinks -Indexes
 
 # Begin Error Description #
 ErrorDocument 401 /401.html
-ErrorDocument 403 /403.html
+#ErrorDocument 403 /403.html
 ErrorDocument 500 /500.html
 # End  Error Description #
 
@@ -50,6 +50,9 @@ ErrorDocument 500 /500.html
 # Begin mod rewrite #
 <IfModule mod_rewrite.c>
     RewriteEngine on
+	
+	RewriteCond %{HTTPS} =off 
+	RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [QSA,L]
 
     RewriteBase /
     RewriteCond %{HTTP_HOST} (.*)

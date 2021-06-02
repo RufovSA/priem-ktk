@@ -1,0 +1,40 @@
+{
+  "manifest_version": 2,
+  "name": "Приёмная компнаия ГАПОУ КО КТК",
+  "short_name": "Приёмная компнаия ГАПОУ КО КТК",
+  "description": "Приёмная компнаия ГАПОУ КО КТК",
+  "version": "1.1",
+  "icons": [{
+    "src": "https://priem.ktk40.ru/app/templates/education/images/icons/fsc-favicon-5-768x768.png",
+    "sizes": "128x128",
+    "type": "image/png"
+  }, {
+    "src": "https://priem.ktk40.ru/app/templates/education/images/icons/fsc-favicon-5-768x768.png",
+    "sizes": "152x152",
+    "type": "image/png"
+  }, {
+    "src": "https://priem.ktk40.ru/app/templates/education/images/icons/fsc-favicon-5-768x768.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }, {
+    "src": "https://priem.ktk40.ru/app/templates/education/images/icons/fsc-favicon-5-768x768.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  }],
+  "start_url": "https://priem.ktk40.ru/",
+  "display": "standalone",
+  "background_color": "#ebeff2",
+  "theme_color": "#7e57c2",
+  "app": {
+    "urls": [
+      "http://www.netrival.com/#utm_source=google_chrome&utm_medium=chrome_app&utm_campaign=google_chrome_app"
+    ],
+    "launch": {
+      "web_url": "http://www.netrival.com/#utm_source=google_chrome&utm_medium=chrome_app&utm_campaign=google_chrome_app"
+    }
+  },
+  "permissions": [
+    "unlimitedStorage",
+    "notifications"
+  ]
+}
